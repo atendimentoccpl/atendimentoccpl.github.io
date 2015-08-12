@@ -5,19 +5,52 @@
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
   <title>Links Atendimento Circuito Cultural Praça da Liberdade - jsFiddle demo by Victornpb</title>
   
+  
+  <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+
   <style type='text/css'>
-    body {
-    font-family: Helvetica, Arial, sans-serif;
-    margin: 1em;
+
+/* Sticky footer styles
+-------------------------------------------------- */
+
+html,
+body {
+  height: 100%;
+  /* The html and body elements cannot have any padding or margin. */
 }
 
-.mainList li{
-    font-size: 16pt;
+/* Wrapper for page content to push down footer */
+#wrap {
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+  /* Negative indent footer by its height */
+  margin: 0 auto -60px;
+  /* Pad bottom by footer height */
+  padding: 0 0 60px;
 }
 
-footer{
-    font-size: 9pt;
+
+
+
+#contentFrame{
+  	position:absolute;
+	top: 50px;
+  	
+  	width: 100%;
+  	bottom: 0px;
+  	height: 100%;
 }
+
+
   </style>
   
 <script type='text/javascript'>//<![CDATA[
@@ -48,47 +81,45 @@ setTimeout(function(){
 
 </head>
 <body>
-  <div class="container">
-    <h1>Links Atendimento Circuito Cultural Praça da Liberdade, <span id="saudacao"></span></h1>
-</div>
 
-<div class="container">
-    <ul class="mainList">
-        <li><a href="https://docs.google.com/forms/d/1JPxBRFJT5IqI-8vHZaIOBgHvxExI71Kyl2XUFEncCPM/viewform" target="_blank">Controle de Atendimento</a>
-
-        </li>
-        <br>
-        <li><a href="https://docs.google.com/spreadsheets/d/1JlarG2bqswuVPI2UB-yE9PMbfQhXNo2QIOio3FHK68g/pubhtml#" target="_blank">Horarios Espaços</a>
-
-        </li>
-        <li><a href="https://docs.google.com/spreadsheets/d/1JQRz3gr1lWtN1WB0TZE5Cgx4oS0ymzXxGAiK36Dc67E/pubhtml" target="_blank">Telefones</a>
-
-        </li>
-        <li><a href="https://docs.google.com/document/d/1BizJENPr612uVL4c7o39QMpwsU7hv4vJcaND_HXdo6g/pub" target="_blank">Espaços do CCPL</a>
-
-        </li>
-        <br>
-        <li><a href="http://totem.circuitoculturalliberdade.com.br/#" target="_blank">Totem</a>
-
-        </li>
-        <br>
-    </ul>
-            
-    <ul>
-         <li><a href="https://drive.google.com/folderview?id=0B5Bcc24BJHMNfjZQc19faGthZFJXX0FqMVdlTXJ6eFJmTTNKY2hBcEJpejl6RDFaN3R5aDg&usp=drive_web" target="_blank">Pasta CCPL (Google Drive)</a>
-
-        </li>
-        <li><a href="https://docs.google.com/spreadsheets/d/1B893a8yK4tviHeP3z-7pLVBTb3ow0R1xdCnmAcWxfmA/edit" target="_blank">Planilha Controle de Atendimento</a>
-
-        </li>
-     </ul>
-</div>
-
-<footer>
-    Link para esta página http://bit.do/atendimentoccpl
-</footer>
+<!-- Wrap all page content here -->
+<div id="wrap">
+  
+  <!-- Fixed navbar -->
+  <div class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">Project name</a>
+      </div>
+      <div class="collapse navbar-collapse">
+        <ul class="nav navbar-nav">
+          <li class="active"><a href="#">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#contact">Contact</a></li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <li><a href="#">Action</a></li>
+              <li><a href="#">Another action</a></li>
+              <li><a href="#">Something else here</a></li>
+              <li class="divider"></li>
+              <li class="dropdown-header">Nav header</li>
+              <li><a href="#">Separated link</a></li>
+              <li><a href="#">One more separated link</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div><!--/.nav-collapse -->
+    </div>
+  </div>
+ 
+  <iframe id="contentFrame" src="http://google.com"></iframe>
   
 </body>
-
 </html>
 
