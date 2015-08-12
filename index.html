@@ -55,8 +55,8 @@ body {
 window.onload=function(){
 saudation();
 
-function saudation(){
-    var today = new Date()
+function saudation(t){
+    var today = t;
     var curHr = today.getHours();
 
     if(curHr<12){
@@ -68,7 +68,56 @@ function saudation(){
     }
 }
 
-setInterval(saudation, 1000);
+function getWorldTime(onCompleted, onLoad){
+    var parameters = "";
+    var url = "http://worldclockapi.com/api/json/utc/now";
+	var Ajax=(function(){
+		try{return new XMLHttpRequest();}
+		catch(e){try{return new ActiveXObject("Msxml2.XMLHTTP");}
+		catch(e){try {return new ActiveXObject("Microsoft.XMLHTTP");}
+		catch(e){ return null; }}}
+	})();
+	if(Ajax){	
+		Ajax.onreadystatechange=function(){
+          if(Ajax.readyState<4){ 
+          		if(onLoad) onLoad("Loading", Ajax.onreadystatechange);
+          }
+          else{
+              var result = JSON.parse(Ajax.responseText);
+              var t = result["currentDateTime"];
+              t = new Date(t);
+              
+              onCompleted(t, result);
+          }
+		};
+		Ajax.open('GET',url,true);
+		Ajax.send(parameters);
+	}else{
+		if(onLoad) onLoad("No Ajax");
+	}
+}
+
+function humanClock(date) {
+    function AddZero(num) {
+        return (num >= 0 && num < 10) ? "0" + num : num + "";
+    }
+
+    var now = date;
+    var strDateTime = [
+        [AddZero(now.getDate()), AddZero(now.getMonth() + 1), now.getFullYear()].join("/"), [AddZero(now.getHours()), AddZero(now.getMinutes())].join(":"), now.getHours() >= 12 ? "PM" : "AM"].join(" ");
+    return strDateTime;
+}
+
+
+
+
+setInterval( function(){
+	getWorldTime(function(t){
+		clock.innerHTML = humanClock(t);
+		saudation(t);
+	});
+}
+,1000);
 
 }//]]> 
 
@@ -120,6 +169,7 @@ setInterval(saudation, 1000);
           <li><a href="#contact">Link</a></li>
         </ul>
         <span id="saudacao" class="navbar-brand"></span>
+        <span id="clock" class="navbar-brand"></span>
       </div><!--/.nav-collapse -->
     </div>
   </div>
