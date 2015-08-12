@@ -68,10 +68,7 @@ function saudation(){
     }
 }
 
-setTimeout(function(){
-	window.location = window.location;
-},
-1000*60);
+setInterval(saudation, 1000);
 
 }//]]> 
 
@@ -122,7 +119,7 @@ setTimeout(function(){
           </li>
           <li><a href="#contact">Link</a></li>
         </ul>
-        <span id="saudacao"></span>
+        <span id="saudacao" class="navbar-brand"></span>
       </div><!--/.nav-collapse -->
     </div>
   </div>
