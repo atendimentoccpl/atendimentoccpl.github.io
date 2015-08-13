@@ -49,9 +49,12 @@ body {
   	height: 100%;
 }
 
+#rightSpan{
+  font-size: 11pt;
+}
 
 </style>
-<script type='text/javascript'>//<![CDATA[
+<script type='text/javascript'>
 
 window.onload=function(){
     updateClock();
@@ -118,8 +121,6 @@ function humanClock(date) {
     return strDateTime;
 }
 
-
-//]]> 
 </script>
 
 </head>
@@ -141,7 +142,7 @@ function humanClock(date) {
       </div>
       <div class="collapse navbar-collapse">
         <ul class="nav navbar-nav">
-          <li class="active"><a href="#">Home</a></li>
+          <li class=""><a href="#">Home</a></li>
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Atendimento <b class="caret"></b></a>
             <ul class="dropdown-menu">
@@ -167,9 +168,9 @@ function humanClock(date) {
           </li>
           <li><a href="#contact">Link</a></li>
         </ul>
-        <span class="navbar-brand pull-right">
+        <span id="rightSpan" class="navbar-brand pull-right">
         	<span id="saudacao">Olá</span>
-        	<span id="clock">##:##</span>
+          <span id="clock">00:00</span>
         </span>
       </div><!--/.nav-collapse -->
     </div>
@@ -179,4 +180,3 @@ function humanClock(date) {
   
 </body>
 </html>
-
