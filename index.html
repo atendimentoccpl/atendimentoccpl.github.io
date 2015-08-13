@@ -4,6 +4,7 @@
 <head>
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
   <title>Links Atendimento Circuito Cultural Praça da Liberdade - jsFiddle demo by Victornpb</title>
+  <meta http-equiv="refresh" content="60">
   <base target="contentFrame">
   
   <!-- Latest compiled and minified CSS -->
@@ -52,8 +53,17 @@ body {
 
 </style>
 <script type='text/javascript'>//<![CDATA[
+
 window.onload=function(){
-saudation();
+    setInterval(updateClock, 1000*10);
+}
+
+function updateClock(){
+	getWorldTime(function(t){
+		clock.innerHTML = humanClock(t);
+		saudation(t);
+	});	
+}
 
 function saudation(t){
     var today = t;
@@ -109,18 +119,7 @@ function humanClock(date) {
 }
 
 
-
-
-setInterval( function(){
-	getWorldTime(function(t){
-		clock.innerHTML = humanClock(t);
-		saudation(t);
-	});
-}
-,1000);
-
-}//]]> 
-
+//]]> 
 </script>
 
 </head>
@@ -168,8 +167,10 @@ setInterval( function(){
           </li>
           <li><a href="#contact">Link</a></li>
         </ul>
-        <span id="saudacao" class="navbar-brand"></span>
-        <span id="clock" class="navbar-brand"></span>
+        <span class="navbar-brand">
+        	<span id="saudacao"></span>
+        	<span id="clock></span>
+        </span>
       </div><!--/.nav-collapse -->
     </div>
   </div>
