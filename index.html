@@ -49,8 +49,8 @@ body {
 #rightSpan{
   
 }
-#saudation{
-  text-transform: capitalize;
+#saudacao{
+  text-transform: auto;
 }
 #clock{
   font-size: 11pt;
@@ -64,10 +64,10 @@ window.onload=function(){
 }
 
 function updateClock(){
-	getWorldTime(function(t){
-		clock.innerHTML = humanClock(t);
-		saudation(t);
-	});	
+    getWorldTime(function(t){
+    	clock.innerHTML = humanClock(t);
+    	saudation(t);
+    });	
 }
 
 function saudation(t){
@@ -75,11 +75,11 @@ function saudation(t){
     var curHr = today.getHours();
 
     if(curHr<12){
-          saudacao.innerHTML = "bom dia!";
+          saudacao.innerHTML = "Bom dia!";
     }else if(curHr<18){
-          saudacao.innerHTML = "boa tarde!";
+          saudacao.innerHTML = "Boa tarde!";
     }else{
-          saudacao.innerHTML = "boa noite!";
+          saudacao.innerHTML = "Boa noite!";
     }
 }
 
