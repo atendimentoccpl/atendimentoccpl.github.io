@@ -1,1 +1,47 @@
-Home
+<!DOCTYPE html>
+<html>
+<head><style type="text/css">body{
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  
+  background-repeat: no-repeat;
+}
+</style>
+
+<title>Random BG</title>
+</head>
+<body>
+
+<script>
+var randBG=[
+  "http://2.bp.blogspot.com/-thnCT_Znj74/Uyoh9df4shI/AAAAAAAADXY/faBsJXSs7SU/s1600/1.JPG",
+  "https://psdbmg.files.wordpress.com/2010/11/museu-mg.jpg",
+  "http://www.cultura.mg.gov.br/images/2015/CCPL/CCPL.jpg",
+  "https://psdbminas.files.wordpress.com/2014/09/centro-cultural1.jpg",
+  "http://www.triptips.com.br/site/wp-content/uploads/2014/05/bho.jpg",
+  "http://farm5.staticflickr.com/4049/4319747756_b2f72f9dca_b.jpg",
+  "http://www.fdc.org.br/hotsites/mail/conference/2014/img/belo_horizonte_03.jpg",
+  "http://static.panoramio.com/photos/large/2534061.jpg",
+  "http://2.bp.blogspot.com/-fi3J7l27yKM/UyooZmAx9sI/AAAAAAAADe4/Ob2PnMlIEtc/s1600/17+%25282%2529.JPG",
+  "http://static.panoramio.com/photos/large/103334617.jpg",
+  "http://farm3.static.flickr.com/2650/3927992137_d135c08a03_b.jpg",
+  "http://www.fdc.org.br/hotsites/mail/conference/2014/img/belo_horizonte_03.jpg",
+  "http://static.agenciaminas.mg.gov.br/media/portal/imagens/2014/12/cache/alberto-pinto-coelho-parabeniza-belo-horizonte-pelo-aniversario-de-117-anos_2_n_i_center.jpg"
+];
+
+                  
+function setRandomBG(){
+    var num=Math.floor(Math.random()*randBG.length);
+    document.body.style.backgroundImage='url('+randBG[num]+')';
+}
+
+
+window.onload=function() {
+     setRandomBG();
+     setInterval(setRandomBG, 1000*60);
+};
+
+</script>
+</body>
