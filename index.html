@@ -55,6 +55,7 @@ body {
 <script type='text/javascript'>//<![CDATA[
 
 window.onload=function(){
+    updateClock();
     setInterval(updateClock, 1000*10);
 }
 
@@ -167,9 +168,9 @@ function humanClock(date) {
           </li>
           <li><a href="#contact">Link</a></li>
         </ul>
-        <span class="navbar-brand">
+        <span class="navbar-brand pull-right">
         	<span id="saudacao">Olá</span>
-        	<span id="clock>...</span>
+        	<span id="clock>##:##</span>
         </span>
       </div><!--/.nav-collapse -->
     </div>
