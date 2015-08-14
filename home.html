@@ -73,9 +73,11 @@ var randBG=[
 ];
 
                   
-function setRandomBG(){
-    var num=Math.floor(Math.random()*randBG.length);
-    document.getElementById("bg").style.backgroundImage='url('+randBG[num]+')';
+function setRandomBG(i){
+    var num = Math.floor(Math.random()*randBG.length);
+    var bg = randBG[i?i:num];
+    document.getElementById("bg").style.backgroundImage='url('+bg+')';
+    console.log(bg);
 }
 
 
