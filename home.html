@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
-<head><style type="text/css">
+<head>
+<title>Random BG</title>
+<style type="text/css">
 html ,body{
   margin: 0;
   border: 0;
@@ -23,12 +25,13 @@ body{
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+    
+  transition: background 1s ease;
 }
 </style>
-
-<title>Random BG</title>
 </head>
 <body>
+ 
 <div id="bg"></div>
 
 <script>
@@ -38,15 +41,40 @@ var randBG=[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26
 function setRandomBG(i){
     var num = Math.floor(Math.random()*randBG.length);
     var bg = randBG[i?i:num];
-    document.getElementById("bg").style.backgroundImage='url(bg/'+bg+'.jpg)';
-    console.log(bg);
+    
+    var url = "/bg/"+bg+".jpg";
+  
+    preload(url, function(){
+        document.getElementById("bg").style.backgroundImage='url('+url+')';
+        console.log(url);
+    });
+    
 }
 
 
 window.onload=function() {
      setRandomBG();
-     setInterval(setRandomBG, 1000*60);
+     setInterval(setRandomBG, 1000*30);
 };
 
+  
+  function preload(src, callback, timeout){
+    
+    var preloadImg = new Image();
+    
+    if(timeout){
+      var timer = setTimeout(function(){
+        callback(null);
+         preloadImg = null;
+      }, timeout);
+    }
+    
+    preloadImg.onload = function(){
+        clearTimeout(timer);
+        callback(src);
+        preloadImg = null;
+    }
+    preloadImg.src = src;
+  }
 </script>
 </body>
