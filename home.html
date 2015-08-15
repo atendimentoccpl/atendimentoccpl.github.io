@@ -25,8 +25,13 @@ body{
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-    
-  transition: background 1s ease;
+  
+  -webkit-transition: background 1s linear;
+  -moz-transition: background 1s linear;
+  -o-transition: background 1s linear;
+  transition: background 1s linear;
+  
+  background-image: url(bg/33.jpg);
 }
 </style>
 </head>
@@ -35,46 +40,49 @@ body{
 <div id="bg"></div>
 
 <script>
+var bgList = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34];
+var interval = 30; //seconds
 
-var randBG=[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34];
-                  
+window.onload = function() {
+     setInterval(setRandomBG, 1000*interval);
+};
+
+
 function setRandomBG(i){
-    var num = Math.floor(Math.random()*randBG.length);
-    var bg = randBG[i?i:num];
+    var num = Math.floor(Math.random()*bgList.length);
+    var bg = bgList[i?i:num];
     
     var url = "/bg/"+bg+".jpg";
   
-    preload(url, function(){
-        document.getElementById("bg").style.backgroundImage='url('+url+')';
-        console.log(url);
-    });
+    preload(url, function(e, src, dur){
+        document.getElementById("bg").style.backgroundImage='url('+src+')';
+        console.log(e, src, dur);
+    }, 1000*10);
     
 }
 
-
-window.onload=function() {
-     setRandomBG();
-     setInterval(setRandomBG, 1000*30);
-};
-
+/**
+ * Function that preloads an image and handles callback on load and timeout
+ */
+function preload(src, callback, timeout){
+  var sTime = Date.now();
+  var preloadImg = new Image();
   
-  function preload(src, callback, timeout){
-    
-    var preloadImg = new Image();
-    
-    if(timeout){
-      var timer = setTimeout(function(){
-        callback(null);
-         preloadImg = null;
-      }, timeout);
-    }
-    
-    preloadImg.onload = function(){
-        clearTimeout(timer);
-        callback(src);
-        preloadImg = null;
-    }
-    preloadImg.src = src;
+  if(timeout){
+    var timer = setTimeout(function(){
+      var duration = Date.now() - sTime;
+      callback("timeout", src, duration);
+       preloadImg = null;
+    }, timeout);
   }
+  
+  preloadImg.onload = function(){
+      var duration = Date.now() - sTime;
+      clearTimeout(timer);
+      callback("loaded", src, duration);
+      preloadImg = null;
+  }
+  preloadImg.src = src;
+}
 </script>
 </body>
