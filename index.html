@@ -73,14 +73,22 @@ function updateClock(){
 function saudation(t){
     var today = t;
     var curHr = today.getHours();
-
+    
+    var s;
+    
     if(curHr<12){
-          saudacao.innerHTML = "Bom dia!";
+          s = "Bom dia!";
     }else if(curHr<18){
-          saudacao.innerHTML = "Boa tarde!";
+          s = "Boa tarde!";
     }else{
-          saudacao.innerHTML = "Boa noite!";
+          s = "Boa noite!";
     }
+    
+    if(humanClock(t).match("11/09")){
+    	s += " Parabens Luiza! ";
+    }
+    
+    saudacao.innerHTML = s;
 }
 
 function getWorldTime(onCompleted, onLoad){
