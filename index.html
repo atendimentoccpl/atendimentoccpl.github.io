@@ -60,7 +60,7 @@ body {
 
 window.onload=function(){
     updateClock();
-    setInterval(updateClock, 1000*10);
+    setInterval(updateClock, 1000*3);
 }
 
 function updateClock(){
@@ -85,7 +85,7 @@ function saudation(t){
     }
     
     if(humanClock(t).match("11/09")){
-    	var adjetivos = ["incrivel","feia","legal","chata","irritante","s2","linda","boboca","a melhor", "musa", "doida", "tilele", "normalzinha", "sem  descricao"];
+    	var adjetivos = ["sem igual","quase normal","incrivel","um amor","feia","legal","chata","irritante","s2","quetinha","convencida","se acha","linda","boboca","a melhor", "musa", "doida", "tilele", "normalzinha", "sem  descricao"];
     	var num = Math.floor(Math.random()*adjetivos.length);
     	var adjetivo = adjetivos[num];
     
