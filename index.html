@@ -85,7 +85,11 @@ function saudation(t){
     }
     
     if(humanClock(t).match("11/09")){
-    	s = "Parabens Luiza! Você é incrível! Musa! ";
+    	var adjetivos = ["incrivel","feia","legal","chata","irritante","s2","linda","boboca","a melhor", "musa", "doida", "tilele", "normalzinha", "sem  descricao"];
+    	var num = Math.floor(Math.random()*adjetivos.length);
+    	var adjetivo = adjetivos[num];
+    
+    	s = "Parabens Luiza! Você é "+adjetivo+"!";
     }
     
     saudacao.innerHTML = s;
