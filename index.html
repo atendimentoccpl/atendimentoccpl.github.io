@@ -64,6 +64,20 @@ body {
 window.onload=function(){
     updateClock();
     setInterval(updateClock, 1000*10);
+    
+    document.querySelector(".navbar").onclick=function(ev){
+    	var elm = ev.target;
+    	
+    	if(elm.href){
+	    	if(elm.getAttribute("data-title")){
+	    		document.title = elm.getAttribute("data-title") + " - Atendmento CCPL";
+	    	}
+    	}else{
+    		document.title = "Atendimento CCPL";
+    	}
+    	
+    }
+    
 }
 
 function updateClock(){
@@ -138,6 +152,30 @@ function humanClock(date) {
     return strDateTime;
 }
 
+
+
+
+/*!
+ * Dynamically changing favicons with JavaScript
+ * Works in all A-grade browsers except Safari and Internet Explorer
+ * Demo: http://mathiasbynens.be/demo/dynamic-favicons
+ */
+
+// HTML5™, baby! http://mathiasbynens.be/notes/document-head
+document.head = document.head || document.getElementsByTagName('head')[0];
+
+function changeFavicon(src) {
+ var link = document.createElement('link'),
+     oldLink = document.getElementById('dynamic-favicon');
+ link.id = 'dynamic-favicon';
+ link.rel = 'shortcut icon';
+ link.href = src;
+ if (oldLink) {
+  document.head.removeChild(oldLink);
+ }
+ document.head.appendChild(link);
+}
+
 </script>
 
 </head>
@@ -163,7 +201,7 @@ function humanClock(date) {
           <li class="dropdown">
             <a href="" class="dropdown-toggle" data-toggle="dropdown">Atendimento <b class="caret"></b></a>
             <ul class="dropdown-menu">
-              <li><a href="https://docs.google.com/forms/d/1JPxBRFJT5IqI-8vHZaIOBgHvxExI71Kyl2XUFEncCPM/viewform"><i class="glyphicon glyphicon-check"></i> Controle de Atendimento</a></li>
+              <li><a href="https://docs.google.com/forms/d/1JPxBRFJT5IqI-8vHZaIOBgHvxExI71Kyl2XUFEncCPM/viewform" data-title="Controle de Atendimento" data-icon=""><i class="glyphicon glyphicon-check"></i> Controle de Atendimento</a></li>
               <li class="divider"></li>
               <li class="dropdown-header">Relatórios</li>
               <li><a href="https://docs.google.com/spreadsheets/d/1B893a8yK4tviHeP3z-7pLVBTb3ow0R1xdCnmAcWxfmA/pubhtml#"><i class="glyphicon glyphicon-stats"></i> Relatório de Atendimento</a></li>
@@ -176,14 +214,14 @@ function humanClock(date) {
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Espaços <b class="caret"></b></a>
             <ul class="dropdown-menu">
-              <li><a href="https://docs.google.com/spreadsheets/d/1JQRz3gr1lWtN1WB0TZE5Cgx4oS0ymzXxGAiK36Dc67E/pubhtml"><i class="glyphicon glyphicon-earphone"></i> Telefones</a></li>
-              <li><a href="https://docs.google.com/spreadsheets/d/1JlarG2bqswuVPI2UB-yE9PMbfQhXNo2QIOio3FHK68g/pubhtml"><i class="glyphicon glyphicon-time"></i> Horários</a></li>
+              <li><a href="https://docs.google.com/spreadsheets/d/1JQRz3gr1lWtN1WB0TZE5Cgx4oS0ymzXxGAiK36Dc67E/pubhtml" data-title="Telefones" data-icon=""><i class="glyphicon glyphicon-earphone"></i> Telefones</a></li>
+              <li><a href="https://docs.google.com/spreadsheets/d/1JlarG2bqswuVPI2UB-yE9PMbfQhXNo2QIOio3FHK68g/pubhtml" data-title="Horários" data-icon=""><i class="glyphicon glyphicon-time"></i> Horários</a></li>
               
-              <li><a href="https://docs.google.com/document/d/1BizJENPr612uVL4c7o39QMpwsU7hv4vJcaND_HXdo6g/pub"><i class="glyphicon glyphicon-info-sign"></i> Informações</a></li>
+              <li><a href="https://docs.google.com/document/d/1BizJENPr612uVL4c7o39QMpwsU7hv4vJcaND_HXdo6g/pub" data-title="Informações" data-icon=""><i class="glyphicon glyphicon-info-sign"></i> Informações</a></li>
               <li class="divider"></li>
               <li class="dropdown-header">Site</li>
               <li><a href="http://circuitoculturalliberdade.com.br/#">circuitoculturalliberdade.com.br</a></li>
-              <li><a href="http://circuitoculturalliberdade.com.br/plus/modulos/listas/index.php?tac=agenda&layout=programacao">Programação</a></li>
+              <li><a href="http://circuitoculturalliberdade.com.br/plus/modulos/listas/index.php?tac=agenda&layout=programacao" data-title="Programação" data-icon="">Programação</a></li>
               <li class="divider"></li>
               
               <li><a href="http://totem.circuitoculturalliberdade.com.br/#">Totem</a></li>
@@ -200,7 +238,7 @@ function humanClock(date) {
               <li><a href="https://docs.google.com/forms/d/1RmE-t_NUh8IVP1_zhJIx_STrSNsq7iuOsDZol3gFu_0/viewform"><i class="glyphicon glyphicon glyphicon-ok-circle" aria-hidden="true"></i> Ponto </a></li>
               <li><a href="https://docs.google.com/spreadsheets/d/1XZdTBBBD4YEmymwFTPPw4RZAo4U1k4Ew5fGViXX2DuE/edit?usp=drive_web"><i class="glyphicon glyphicon glyphicon-th-list" aria-hidden="true"></i> Planilha </a></li>
                <li class="divider"></li>
-              <li><a href="https://docs.google.com/spreadsheets/d/1RLEwe1F6eVj-VMiFHicx7zwBNPb7rs9ZCnmnsNDgmIk/edit#gid=1610481601"><i class="glyphicon glyphicon-calendar" aria-hidden="true"></i> Escala de Trabalho e Folgas</a></li>
+              <li><a href="https://docs.google.com/spreadsheets/d/1RLEwe1F6eVj-VMiFHicx7zwBNPb7rs9ZCnmnsNDgmIk/edit#gid=1610481601" data-title="Escala de Trabalho e Folgas" data-icon=""><i class="glyphicon glyphicon-calendar" aria-hidden="true"></i> Escala de Trabalho e Folgas</a></li>
               <li class="divider"></li>
               <li class="dropdown-header">Ferramentas</li>
               <li><a href="http://jsfiddle.net/Victornpb/m8cedfo0/show"> Gerador de Folha de Ponto</a></li>
