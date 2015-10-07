@@ -11,8 +11,8 @@ function initClock() {
 
     setInterval(function() {
         saudacaoDiv.innerHTML = (!clock.synced ? "(" + clock.status + ")" : "");
-        clockDiv.innerHTML = formatedDate(" {saudacao}, {ddd} {dd}/{moo}/{yy} {hh}:{mm}:{ss} {tt}", clock.now());
-    }, 1000);
+        clockDiv.innerHTML = formatedDate(" <i>{saudacao}</i>, {ddd} {dd}/{moo}/{yy} {HH}:{mm}<small>:{ss}</small> {tt}", clock.now());
+    }, 500);
 
 }
 
@@ -66,7 +66,7 @@ function InternetClock() {
 
     this.offset = 0;
     this.lastSync = 0;
-    this.syncExpire = 1000 * 30;
+    this.syncExpire = 1000 * 60 * 5;
 
     this.status = "Hora Local";
     this.synced = false;
