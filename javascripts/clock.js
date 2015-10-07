@@ -10,8 +10,8 @@ function initClock() {
     clock = new InternetClock();
 
     setInterval(function() {
-        saudacaoDiv.innerHTML = (!clock.synced ? "(" + clock.status + ")" : "");
-        clockDiv.innerHTML = formatedDate(" <i>{saudacao}</i>, {ddd} {dd}/{moo}/{yy} {HH}:{mm}<small>:{ss}</small> {tt}", clock.now());
+        saudacaoDiv.innerHTML = '<span class="synced">'+(!clock.synced ? "(" + clock.status + ")" : "")+'</span>';
+        clockDiv.innerHTML = formatedDate(' <span class="saudacao">{saudacao}</span>, <span class="week">{ddd}</span> <span class="date">{dd}/{moo}/{yy}</span> <span class="clock">{HH}:{mm}<span class="ss">:{ss} {tt}</span></span>', clock.now());
     }, 500);
 
 }
