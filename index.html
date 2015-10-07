@@ -1,261 +1,111 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-  <title>Atendimento Circuito Cultural Praça da Liberdade - Victornpb</title>
-  <base target="contentFrame">
-  
-  <link rel="icon" type="image/png" href="http://i.imgur.com/jNWFzMB.png" />
-  <link rel="apple-touch-icon" type="image/png" href="http://i.imgur.com/jNWFzMB.png" />
-  
-  <!-- Latest compiled and minified CSS -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title>Circuito Cultural Praça da Liberdade - by Victornpb</title>
+    <base target="contentFrame">
 
-  <!-- Optional theme -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+    <link rel="icon" type="image/png" href="http://i.imgur.com/jNWFzMB.png" />
+    <link rel="apple-touch-icon" type="image/png" href="http://i.imgur.com/jNWFzMB.png" />
 
-  <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 
-  <!-- Latest compiled and minified JavaScript -->
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
 
-  <style type='text/css'>
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
 
-/* Sticky footer styles
--------------------------------------------------- */
-
-html,
-body {
-  height: 100%;
-  /* The html and body elements cannot have any padding or margin. */
-}
-
-/* Wrapper for page content to push down footer */
-#wrap {
-  min-height: 100%;
-  height: auto !important;
-  height: 100%;
-  /* Negative indent footer by its height */
-  margin: 0 auto -60px;
-  /* Pad bottom by footer height */
-  padding: 0 0 60px;
-}
-
-#contentFrame{
-  position:absolute;
-  width: 100%;
-  height: 100%;
-  padding-top: 50px;
-  border: 0;
-}
-
-#rightSpan{
-  
-}
-#saudacao{
-  text-transform: auto;
-}
-#clock{
-  font-size: 11pt;
-}
-</style>
-<script type='text/javascript'>
-
-window.onload=function(){
-    updateClock();
-    setInterval(updateClock, 1000*10);
-    
-    document.querySelector(".navbar").onclick=function(ev){
-    	var elm = ev.target;
-    	
-    	if(elm.href){
-	    	if(elm.getAttribute("data-title")){
-	    		document.title = elm.getAttribute("data-title") + " - Atendmento CCPL";
-	    	}
-    	}else{
-    		document.title = "Atendimento CCPL";
-    	}
-    	
-    }
-    
-}
-
-function updateClock(){
-    getWorldTime(function(t){
-    	clock.innerHTML = humanClock(t);
-    	saudation(t);
-    });	
-}
-
-function saudation(t){
-    var today = t;
-    var curHr = today.getHours();
-    
-    var s;
-    
-    if(curHr<12){
-          s = "Bom dia!";
-    }else if(curHr<18){
-          s = "Boa tarde!";
-    }else{
-          s = "Boa noite!";
-    }
-    
-    if(humanClock(t).match("11/09")){
-    	var adjetivos = ["sem igual","quase normal","incrivel","um amor","feia","legal","chata","irritante","s2","quetinha","convencida","se acha","linda","boboca","a melhor", "musa", "doida", "tilele", "normalzinha", "sem  descricao"];
-    	var num = Math.floor(Math.random()*adjetivos.length);
-    	var adjetivo = adjetivos[num];
-    
-    	s = "Parabens Luiza! Você é "+adjetivo+"!";
-    }
-    
-    saudacao.innerHTML = s;
-}
-
-function getWorldTime(onCompleted, onLoad){
-    var parameters = "";
-    var url = "http://worldclockapi.com/api/json/utc/now";
-	var Ajax=(function(){
-		try{return new XMLHttpRequest();}
-		catch(e){try{return new ActiveXObject("Msxml2.XMLHTTP");}
-		catch(e){try {return new ActiveXObject("Microsoft.XMLHTTP");}
-		catch(e){ return null; }}}
-	})();
-	if(Ajax){	
-		Ajax.onreadystatechange=function(){
-          if(Ajax.readyState<4){ 
-          		if(onLoad) onLoad("Loading", Ajax.onreadystatechange);
-          }
-          else{
-              var result = JSON.parse(Ajax.responseText);
-              var t = result["currentDateTime"];
-              t = new Date(t);
-              
-              onCompleted(t, result);
-          }
-		};
-		Ajax.open('GET',url,true);
-		Ajax.send(parameters);
-	}else{
-		if(onLoad) onLoad("No Ajax");
-	}
-}
-
-function humanClock(date) {
-    function AddZero(num) {
-        return (num >= 0 && num < 10) ? "0" + num : num + "";
-    }
-
-    var now = date;
-    var strDateTime = [
-        [AddZero(now.getDate()), AddZero(now.getMonth() + 1), now.getFullYear()].join("/"), [AddZero(now.getHours()), AddZero(now.getMinutes())].join(":"), now.getHours() >= 12 ? "PM" : "AM"].join(" ");
-    return strDateTime;
-}
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
 
-
-
-/*!
- * Dynamically changing favicons with JavaScript
- * Works in all A-grade browsers except Safari and Internet Explorer
- * Demo: http://mathiasbynens.be/demo/dynamic-favicons
- */
-
-// HTML5™, baby! http://mathiasbynens.be/notes/document-head
-document.head = document.head || document.getElementsByTagName('head')[0];
-
-function changeFavicon(src) {
- var link = document.createElement('link'),
-     oldLink = document.getElementById('dynamic-favicon');
- link.id = 'dynamic-favicon';
- link.rel = 'shortcut icon';
- link.href = src;
- if (oldLink) {
-  document.head.removeChild(oldLink);
- }
- document.head.appendChild(link);
-}
-
-</script>
+    <link rel="stylesheet" href="style.css">
+    <script src="clock.js"></script>
+    <script src="script.js"></script>
 
 </head>
+
 <body>
 
-<!-- Wrap all page content here -->
-<div id="wrap">
-  
-  <!-- Fixed navbar -->
-  <div class="navbar navbar-default navbar-fixed-top">
-    <div class="container">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="home.html">Circuito Cultural Praça Liberdade</a>
-      </div>
-      <div class="collapse navbar-collapse">
-        <ul class="nav navbar-nav">
-          <li class=""><a href="home.html">Home</a></li>
-          <li class="dropdown">
-            <a href="" class="dropdown-toggle" data-toggle="dropdown">Atendimento <b class="caret"></b></a>
-            <ul class="dropdown-menu">
-              <li><a href="https://docs.google.com/forms/d/1JPxBRFJT5IqI-8vHZaIOBgHvxExI71Kyl2XUFEncCPM/viewform" data-title="Controle de Atendimento" data-icon=""><i class="glyphicon glyphicon-check"></i> Controle de Atendimento</a></li>
-              <li class="divider"></li>
-              <li class="dropdown-header">Relatórios</li>
-              <li><a href="https://docs.google.com/spreadsheets/d/1B893a8yK4tviHeP3z-7pLVBTb3ow0R1xdCnmAcWxfmA/pubhtml#"><i class="glyphicon glyphicon-stats"></i> Relatório de Atendimento</a></li>
-              <li><a href="https://docs.google.com/forms/d/1JPxBRFJT5IqI-8vHZaIOBgHvxExI71Kyl2XUFEncCPM/viewanalytics" target="_blank"><i class="glyphicon glyphicon-stats"></i> Estatisticas</a></li>
-              <li class="divider"></li>
-              <li class="dropdown-header">Documentos</li>
-              <li><a href="https://docs.google.com/spreadsheets/d/1B893a8yK4tviHeP3z-7pLVBTb3ow0R1xdCnmAcWxfmA/edit"><i class="glyphicon glyphicon-th-list"></i> Planilha Controle de Atendimento</a></li>
-            </ul>
-          </li>
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Espaços <b class="caret"></b></a>
-            <ul class="dropdown-menu">
-              <li><a href="https://docs.google.com/spreadsheets/d/1JQRz3gr1lWtN1WB0TZE5Cgx4oS0ymzXxGAiK36Dc67E/pubhtml" data-title="Telefones" data-icon=""><i class="glyphicon glyphicon-earphone"></i> Telefones</a></li>
-              <li><a href="https://docs.google.com/spreadsheets/d/1JlarG2bqswuVPI2UB-yE9PMbfQhXNo2QIOio3FHK68g/pubhtml" data-title="Horários" data-icon=""><i class="glyphicon glyphicon-time"></i> Horários</a></li>
-              
-              <li><a href="https://docs.google.com/document/d/1BizJENPr612uVL4c7o39QMpwsU7hv4vJcaND_HXdo6g/pub" data-title="Informações" data-icon=""><i class="glyphicon glyphicon-info-sign"></i> Informações</a></li>
-              <li class="divider"></li>
-              <li class="dropdown-header">Site</li>
-              <li><a href="http://circuitoculturalliberdade.com.br/#">circuitoculturalliberdade.com.br</a></li>
-              <li><a href="http://circuitoculturalliberdade.com.br/plus/modulos/listas/index.php?tac=agenda&layout=programacao" data-title="Programação" data-icon="">Programação</a></li>
-              <li class="divider"></li>
-              
-              <li><a href="http://totem.circuitoculturalliberdade.com.br/#">Totem</a></li>
-            </ul>
-          </li>
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Mais <b class="caret"></b></a>
-            <ul class="dropdown-menu">
-              <li class="dropdown-header">Google Drive</li>
-               <li><a href="https://drive.google.com/open?id=0B0ogUH-iX2L4OW94TGJVNXNadms" target="_blank"><i class="glyphicon glyphicon-folder-open" aria-hidden="true"></i><i> </i> Documentos </a></li>
-              <li><a href="https://drive.google.com/drive/folders/0B5Bcc24BJHMNfjZQc19faGthZFJXX0FqMVdlTXJ6eFJmTTNKY2hBcEJpejl6RDFaN3R5aDg" target="_blank"><i class="glyphicon glyphicon-folder-open" aria-hidden="true"></i><i> </i> Pasta Atendimento CCPL </a></li>
-              <li class="divider"></li>
-              <li class="dropdown-header">Ponto</li>
-              <li><a href="https://docs.google.com/forms/d/1RmE-t_NUh8IVP1_zhJIx_STrSNsq7iuOsDZol3gFu_0/viewform"><i class="glyphicon glyphicon glyphicon-ok-circle" aria-hidden="true"></i> Ponto </a></li>
-              <li><a href="https://docs.google.com/spreadsheets/d/1XZdTBBBD4YEmymwFTPPw4RZAo4U1k4Ew5fGViXX2DuE/edit?usp=drive_web"><i class="glyphicon glyphicon glyphicon-th-list" aria-hidden="true"></i> Planilha </a></li>
-               <li class="divider"></li>
-              <li><a href="https://docs.google.com/spreadsheets/d/1RLEwe1F6eVj-VMiFHicx7zwBNPb7rs9ZCnmnsNDgmIk/edit#gid=1610481601" data-title="Escala de Trabalho e Folgas" data-icon=""><i class="glyphicon glyphicon-calendar" aria-hidden="true"></i> Escala de Trabalho e Folgas</a></li>
-              <li class="divider"></li>
-              <li class="dropdown-header">Ferramentas</li>
-              <li><a href="http://jsfiddle.net/Victornpb/m8cedfo0/show"> Gerador de Folha de Ponto</a></li>
-              <li><a href="http://jsfiddle.net/Victornpb/has96x22/show"> Gerador de Assinatura</a></li>
-            </ul>
-          </li>
-          
-        </ul>
-        <span id="rightSpan" class="navbar-brand pull-right">
-        	<span id="saudacao">Olá</span>
-        	<span id="clock">00:00</span>
-        </span>
-      </div><!--/.nav-collapse -->
-    </div>
-  </div>
- 
-  <iframe name="contentFrame" id="contentFrame" src="home.html"></iframe>
-  
+    <!-- Wrap all page content here -->
+    <div id="wrap">
+
+        <!-- Fixed navbar -->
+        <div class="navbar navbar-default navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="home.html">Circuito Cultural Praça Liberdade</a>
+                </div>
+                <div class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav">
+                        <li class=""><a href="home.html">Home</a></li>
+                        <li class="dropdown">
+                            <a href="" class="dropdown-toggle" data-toggle="dropdown">Atendimento <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="https://docs.google.com/forms/d/1JPxBRFJT5IqI-8vHZaIOBgHvxExI71Kyl2XUFEncCPM/viewform" data-title="Controle de Atendimento" data-icon=""><i class="glyphicon glyphicon-check"></i> Controle de Atendimento</a></li>
+                                <li class="divider"></li>
+                                <li class="dropdown-header">Relatórios</li>
+                                <li><a href="https://docs.google.com/spreadsheets/d/1B893a8yK4tviHeP3z-7pLVBTb3ow0R1xdCnmAcWxfmA/pubhtml#"><i class="glyphicon glyphicon-stats"></i> Relatório de Atendimento</a></li>
+                                <li><a href="https://docs.google.com/forms/d/1JPxBRFJT5IqI-8vHZaIOBgHvxExI71Kyl2XUFEncCPM/viewanalytics" target="_blank"><i class="glyphicon glyphicon-stats"></i> Estatisticas</a></li>
+                                <li class="divider"></li>
+                                <li class="dropdown-header">Documentos</li>
+                                <li><a href="https://docs.google.com/spreadsheets/d/1B893a8yK4tviHeP3z-7pLVBTb3ow0R1xdCnmAcWxfmA/edit"><i class="glyphicon glyphicon-th-list"></i> Planilha Controle de Atendimento</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Espaços <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="https://docs.google.com/spreadsheets/d/1JQRz3gr1lWtN1WB0TZE5Cgx4oS0ymzXxGAiK36Dc67E/pubhtml" data-title="Telefones" data-icon=""><i class="glyphicon glyphicon-earphone"></i> Telefones</a></li>
+                                <li><a href="https://docs.google.com/spreadsheets/d/1JlarG2bqswuVPI2UB-yE9PMbfQhXNo2QIOio3FHK68g/pubhtml" data-title="Horários" data-icon=""><i class="glyphicon glyphicon-time"></i> Horários</a></li>
+
+                                <li><a href="https://docs.google.com/document/d/1BizJENPr612uVL4c7o39QMpwsU7hv4vJcaND_HXdo6g/pub" data-title="Informações" data-icon=""><i class="glyphicon glyphicon-info-sign"></i> Informações</a></li>
+                                <li class="divider"></li>
+                                <li class="dropdown-header">Site</li>
+                                <li><a href="http://circuitoculturalliberdade.com.br/#">circuitoculturalliberdade.com.br</a></li>
+                                <li><a href="http://circuitoculturalliberdade.com.br/plus/modulos/listas/index.php?tac=agenda&layout=programacao" data-title="Programação" data-icon="">Programação</a></li>
+                                <li class="divider"></li>
+
+                                <li><a href="http://totem.circuitoculturalliberdade.com.br/#">Totem</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Mais <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li class="dropdown-header">Google Drive</li>
+                                <li><a href="https://drive.google.com/open?id=0B0ogUH-iX2L4OW94TGJVNXNadms" target="_blank"><i class="glyphicon glyphicon-folder-open" aria-hidden="true"></i><i> </i> Documentos </a></li>
+                                <li><a href="https://drive.google.com/drive/folders/0B5Bcc24BJHMNfjZQc19faGthZFJXX0FqMVdlTXJ6eFJmTTNKY2hBcEJpejl6RDFaN3R5aDg" target="_blank"><i class="glyphicon glyphicon-folder-open" aria-hidden="true"></i><i> </i> Pasta Atendimento CCPL </a></li>
+                                <li class="divider"></li>
+                                <li class="dropdown-header">Ponto</li>
+                                <li><a href="https://docs.google.com/forms/d/1RmE-t_NUh8IVP1_zhJIx_STrSNsq7iuOsDZol3gFu_0/viewform"><i class="glyphicon glyphicon glyphicon-ok-circle" aria-hidden="true"></i> Ponto </a></li>
+                                <li><a href="https://docs.google.com/spreadsheets/d/1XZdTBBBD4YEmymwFTPPw4RZAo4U1k4Ew5fGViXX2DuE/edit?usp=drive_web"><i class="glyphicon glyphicon glyphicon-th-list" aria-hidden="true"></i> Planilha </a></li>
+                                <li class="divider"></li>
+                                <li><a href="https://docs.google.com/spreadsheets/d/1RLEwe1F6eVj-VMiFHicx7zwBNPb7rs9ZCnmnsNDgmIk/edit#gid=1610481601" data-title="Escala de Trabalho e Folgas" data-icon=""><i class="glyphicon glyphicon-calendar" aria-hidden="true"></i> Escala de Trabalho e Folgas</a></li>
+                                <li class="divider"></li>
+                                <li class="dropdown-header">Ferramentas</li>
+                                <li><a href="http://jsfiddle.net/Victornpb/m8cedfo0/show"> Gerador de Folha de Ponto</a></li>
+                                <li><a href="http://jsfiddle.net/Victornpb/has96x22/show"> Gerador de Assinatura</a></li>
+                            </ul>
+                        </li>
+
+                    </ul>
+                    <span id="rightSpan" class="navbar-brand pull-right">
+          <span id="saudacaoDiv">Olá</span>
+                    <span id="clockDiv">##:##</span>
+                    </span>
+                </div>
+                <!--/.nav-collapse -->
+            </div>
+        </div>
+
+        <iframe name="contentFrame" id="contentFrame" src="home.html"></iframe>
+
 </body>
+
 </html>
