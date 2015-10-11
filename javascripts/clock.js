@@ -30,7 +30,7 @@ function initClock() {
         
         var obj = {
             synced: clock.synced,
-            status: clock.status
+            status: clock.status,
             
             HH: date.getHours(),
             hh: ((date.getHours() + 11) % 12 + 1),
