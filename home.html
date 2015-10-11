@@ -52,7 +52,7 @@ window.onload = function() {
   //disable slideshow on mobile
   if(mobilecheck()==false){
     setRandomBG();
-    setInterval(setRandomBG, 1000*interval);
+    setInterval(setRandomBG, interval);
   }
 };
 
@@ -76,7 +76,7 @@ function setRandomBG(i){
     preload(url, function(e, src, dur){
         console.log("Background changed:", src, e, dur+"ms");
         document.getElementById("bg").style.backgroundImage='url('+src+')';
-    }, interval);
+    }, interval/2);
 }
 
 /**
