@@ -32,6 +32,29 @@ body {
 #saudacao{
   text-transform: auto;
 }
-#clock{
+
+#clockDiv{
   font-size: 11pt;
+}
+.saudacao{
+  opacity: 0.5;
+}
+.week{
+  opacity: 0.5;
+}
+.date{
+  opacity: 0.5;
+}
+
+.clock{
+  font-weight: bold;
+}
+.clock.unsynced{
+ opacity:0.5;
+}
+.clock .ss{
+  font-size: 9pt;
+}
+.clock .tt{
+  font-size: 9pt;
 }
