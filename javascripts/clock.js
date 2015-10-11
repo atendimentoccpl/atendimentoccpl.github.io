@@ -7,22 +7,21 @@ function clearAllTimeouts(){
     }
 }
 
-var clockTimer;
+var clockTimer,
+    clockDiv,
+    clockTemplate;
 
 function initClock() {
     
-    var clockDiv = document.querySelector("#clockDiv");
-    
-    //generate template
-    var clockTemplate = generateTemplate("#clockTemplate");
+    clockDiv = document.querySelector("#clockDiv");
+    clockTemplate = generateTemplate("#clockTemplate");
     
     //instaciate the InternetClock Class
     clock = new InternetClock();
     
-    clockTick();
-    
-     //timer
+    //timer
     clockTimer = setInterval(clockTick, 500);
+    clockTick(); //fisrt tick
 }
 
 function clockTick() {
