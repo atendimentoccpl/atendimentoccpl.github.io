@@ -35,6 +35,7 @@ body {
 
 #clockDiv{
   font-size: 11pt;
+  cursor: default;
 }
 .saudacao{
   opacity: 0.5;
@@ -57,4 +58,13 @@ body {
 }
 .clock .tt{
   font-size: 9pt;
+}
+
+.status{
+  font-size: 9pt;
+  color: darkred;
+}
+.status.synced{
+  display: none;
+  color: inherit;
 }
