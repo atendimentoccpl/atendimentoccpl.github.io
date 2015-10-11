@@ -20,8 +20,7 @@ function initClock() {
     clock = new InternetClock();
     
     //timer
-    clockTimer = setInterval(clockTick, 500);
-    clockTick(); //fisrt tick
+    clockTimer = setInterval(clockTick, 1000);
 }
 
 function clockTick() {
