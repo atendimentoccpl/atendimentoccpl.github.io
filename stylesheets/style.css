@@ -62,7 +62,6 @@ body {
 
 .status{
   font-size: 9pt;
-  color: darkred;
 }
 .status.synced{
   display: none;
