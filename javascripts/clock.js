@@ -1,64 +1,59 @@
+clearAllTimeouts();
 //clear all timeouts, hack fix for liveweave 
-var maxId = setTimeout(function() {}, 0);
-for (var i = 0; i < maxId; i += 1) {
-    clearTimeout(i);
+function clearAllTimeouts(){
+    var maxId = setTimeout(function() {}, 0);
+    for (var i = 0; i < maxId; i += 1) {
+        clearTimeout(i);
+    }
 }
 
+function AddZero(num) {
+    return (num >= 0 && num < 10) ? "0" + num : num + "";
+}
+
+var clockTimer;
 
 function initClock() {
-
+    
+    var clockDiv = document.querySelector("#clockDiv");
+    
+    //generate template
+    var clockTemplate = generateTemplate("#clockTemplate");
+    
+    //instaciate the InternetClock Class
     clock = new InternetClock();
 
-    setInterval(function() {
-        saudacaoDiv.innerHTML = '<span class="synced">'+(!clock.synced ? "(" + clock.status + ")" : "")+'</span>';
-        clockDiv.innerHTML = formatedDate(' <span class="saudacao">{saudacao}</span>, <span class="week">{ddd}</span> <span class="date">{dd}/{moo}/{yy}</span> <span class="clock">{HH}:{mm}<span class="ss">:{ss} {tt}</span></span>', clock.now());
+    //timer
+    clockTimer = setInterval(function() {
+        
+        var date = clock.now();
+        
+        var obj = {
+            synced: clock.synced,
+            status: clock.status
+            
+            HH: date.getHours(),
+            hh: ((date.getHours() + 11) % 12 + 1),
+            mm: AddZero(date.getMinutes()),
+            ss: AddZero(date.getSeconds()),
+            ms: AddZero(date.getMilliseconds()),
+            tt: date.getHours() >= 12 ? "PM" : "AM",
+    
+            dd: AddZero(date.getDate()),
+            ddd: ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"][date.getDay()],
+            dddd: ["Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sabado"][date.getDay()],
+            mo: AddZero(date.getMonth() + 1),
+            moo: ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"][date.getMonth()],
+            yy: date.getFullYear() - 2000,
+            yyyy: date.getFullYear(),
+            saudacao: (date.getHours() < 12) ? "Bom dia" : (date.getHours() < 18) ? "Boa tarde" : "Boa noite"
+        };
+        
+        clockDiv.innerHTML = clockTemplate.apply(obj);
+        
     }, 500);
 
 }
-
-
-if (!String.prototype.formatWithObj) {
-    String.prototype.formatWithObj = function() {
-        var str = this.toString();
-        if (!arguments.length)
-            return str;
-        var args = typeof arguments[0],
-            args = (("string" == args || "number" == args) ? arguments : arguments[0]);
-        for (arg in args)
-            str = str.replace(RegExp("\\{" + arg + "\\}", "gi"), args[arg]);
-        return str;
-    };
-}
-
-
-
-function formatedDate(format, date) {
-
-    function AddZero(num) {
-        return (num >= 0 && num < 10) ? "0" + num : num + "";
-    }
-
-    var t = {
-        HH: date.getHours(),
-        hh: ((date.getHours() + 11) % 12 + 1),
-        mm: AddZero(date.getMinutes()),
-        ss: AddZero(date.getSeconds()),
-        ms: AddZero(date.getMilliseconds()),
-        tt: date.getHours() >= 12 ? "PM" : "AM",
-
-        dd: AddZero(date.getDate()),
-        ddd: ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"][date.getDay()],
-        mo: AddZero(date.getMonth() + 1),
-        moo: ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"][date.getMonth()],
-        yy: date.getFullYear() - 2000,
-        yyyy: date.getFullYear(),
-        saudacao: (date.getHours() < 12) ? "Bom dia" : (date.getHours() < 18) ? "Boa tarde" : "Boa noite"
-    };
-
-    return format.formatWithObj(t);
-}
-
-
 
 
 function InternetClock() {
@@ -66,7 +61,7 @@ function InternetClock() {
 
     this.offset = 0;
     this.lastSync = 0;
-    this.syncExpire = 1000 * 60 * 5;
+    this.syncExpire = 1000 * 60 * 5; //resync with internet every 5 minutes
 
     this.status = "Hora Local";
     this.synced = false;
@@ -184,7 +179,4 @@ function InternetClock() {
         return self.getCompensatedDate(new Date());
     };
 }
-
-
-
 
