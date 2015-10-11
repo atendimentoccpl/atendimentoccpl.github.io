@@ -99,10 +99,9 @@
                         <span id="clockDiv">Loading...</span>
                         
                         <script id="clockTemplate" type="template/html">
-                            <span title="{{this.status}}">
-                                {{ if(this.synced){ }}
-                                    <span class="error">{{this.status}}</span>
-                                {{ } }}
+                            <span title="{{this.status}} LastSync (Hora Local): {{ new Date(this.lastSync) }}">
+                                <span class="status {{this.synced?'synced':'unsynced'}}">{{this.status}}</span>
+                                
                                 <span class="saudacao">{{this.saudacao}}</span>,
                                 <span class="week">{{this.ddd}}</span>
                                 <span class="date">{{this.dd}}/{{this.moo}}/{{this.yy}}</span>
