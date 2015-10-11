@@ -26,12 +26,12 @@ body{
   -o-background-size: cover;
   background-size: cover;
   
-  -webkit-transition: background 3s ease;
-  -moz-transition: background 3s ease;
-  -o-transition: background 3s ease;
-  transition: background 3s ease;
+  -webkit-transition: background 5s ease;
+  -moz-transition: background 5s ease;
+  -o-transition: background 5s ease;
+  transition: background 5s ease;
   
-  background-image: url(bg/33.jpg);
+  background-image: url(bg/30.jpg);
 }
 </style>
 </head>
@@ -39,9 +39,13 @@ body{
  
 <div id="bg"></div>
 
-<script>
+<script type="text/javascript">
+
 var bgList = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34];
-var interval = 30; //seconds
+var interval = 1000*30; //seconds
+
+var random = false;
+var x = 0;
 
 window.onload = function() {
   
@@ -54,15 +58,25 @@ window.onload = function() {
 
 
 function setRandomBG(i){
-    var num = Math.floor(Math.random()*bgList.length);
-    var bg = bgList[i!==undefined?i:num];
+    
+    if(i==undefined){
+      if(random){ //random
+        i = Math.floor(Math.random()*bgList.length);
+      }
+      else{ //sequential
+        x = (x+1)%bgList.length;
+        i = x;
+      }
+    }
+    
+    var bg = bgList[i];
     
     var url = "/bg/"+bg+".jpg";
   
     preload(url, function(e, src, dur){
-        console.log("Background changed", e, src, dur);
+        console.log("Background changed:", src, e, dur+"ms");
         document.getElementById("bg").style.backgroundImage='url('+src+')';
-    }, 1000*interval);
+    }, interval);
 }
 
 /**
@@ -76,7 +90,7 @@ function preload(src, callback, timeout){
   if(timeout){
     var timer = setTimeout(function(){
       var duration = Date.now() - sTime;
-      callback("timeout", src, duration);
+      callback("timedout", src, duration);
        preloadImg = null;
     }, timeout);
   }
