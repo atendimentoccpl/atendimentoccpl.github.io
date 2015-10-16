@@ -34,6 +34,7 @@ body {
 <script src="/javascripts/templating.js"></script>
 <script src="/javascripts/InternetClock.js"></script>
 <script type="text/javascript">
+  var timer;
   
   var MODES = {
     RANDOM: 0,
@@ -47,7 +48,7 @@ body {
   ];
   
   var mode = MODES.TIME;
-  var preloadTimeout = 1000 * 30;
+  var preloadTimeout;
   var interval = 1000; //seconds
   
   var currentBg;
@@ -59,12 +60,17 @@ body {
     clock = new InternetClock();
     clock.syncExpire = 1000*60*60*1; // resync every 1 hour
     clock.sync();
-
-    //disable slideshow on mobile
-    if (mobilecheck() == false) {
-      setRandomBG();
-      setInterval(setRandomBG, interval);
+    
+    if (mobilecheck()) {
+      preloadTimeout = 1000*10;
     }
+    else{
+      preloadTimeout = 1000*60;
+      setRandomBG();
+    }
+    
+    timer = setInterval(setRandomBG, interval);
+
   };
   
   
@@ -100,9 +106,16 @@ body {
     currentBg = url;
     
     preload(url, function(e, src, dur) {
-      console.log("Background changed:", src, e, "Loaded in " + dur + "ms");
-      document.getElementById("bg").style.backgroundImage = 'url(' + src + ')';
-      currentBg = src;
+      if(e=="timeout"){
+        console.log("Background change timedout", src, e, dur + "ms");
+        console.log("Slide show disabled.");
+        clearInterval(timer);
+      }
+      else{
+        console.log("Background changed:", src, e, "Loaded in " + dur + "ms");
+        document.getElementById("bg").style.backgroundImage = 'url(' + src + ')';
+        currentBg = src;
+      }
     }, preloadTimeout);
 
   }
