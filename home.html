@@ -31,6 +31,8 @@ body {
   background-image: url(bg/30.jpg);
 }
 </style>
+<script src="/javascripts/templating.js"></script>
+<script src="/javascripts/InternetClock.js"></script>
 <script type="text/javascript">
   
   var MODES = {
@@ -50,8 +52,13 @@ body {
   
   var currentBg = 5;
   currentBg -= 2;
-
+  
+  var clock;
+  
   window.onload = function() {
+    
+    clock = new InternetClock();
+    clock.syncExpire = 1000*60*60; // 1 hour
 
     //disable slideshow on mobile
     if (mobilecheck() == false) {
@@ -77,8 +84,7 @@ body {
           break;
         
         case MODES.TIME:
-          var t = new Date();
-          i = t.getMinutes() % bgList.length;
+          i = clock.now().getMinutes() % bgList.length;
           break;
       }
 
