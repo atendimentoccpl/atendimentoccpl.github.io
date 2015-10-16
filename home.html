@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Random BG</title>
+<title>Home Background</title>
 <style type="text/css">
 html,
 body {
@@ -50,15 +50,15 @@ body {
   var preloadTimeout = 1000 * 30;
   var interval = 1000; //seconds
   
-  var currentBg = 5;
-  currentBg -= 2;
+  var currentBg;
   
   var clock;
   
   window.onload = function() {
     
     clock = new InternetClock();
-    clock.syncExpire = 1000*60*60; // 1 hour
+    clock.syncExpire = 1000*60*60*1; // resync every 1 hour
+    clock.sync();
 
     //disable slideshow on mobile
     if (mobilecheck() == false) {
@@ -97,11 +97,12 @@ body {
       return;
     }
     
-    currentBg = bg;
+    currentBg = url;
     
     preload(url, function(e, src, dur) {
       console.log("Background changed:", src, e, "Loaded in " + dur + "ms");
       document.getElementById("bg").style.backgroundImage = 'url(' + src + ')';
+      currentBg = src;
     }, preloadTimeout);
 
   }
