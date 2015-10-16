@@ -1,3 +1,12 @@
+clearAllTimeouts();
+//clear all timeouts, hack fix for liveweave 
+function clearAllTimeouts(){
+    var maxId = setTimeout(function() {}, 0);
+    for (var i = 0; i < maxId; i += 1) {
+        clearTimeout(i);
+    }
+}
+
 var pageTitle = "CCPL";
 
 window.onload = function() {
@@ -9,41 +18,55 @@ window.onload = function() {
 
 
 
-if (!String.prototype.formatWithObj) {
-    String.prototype.formatWithObj = function() {
-        var str = this.toString();
-        if (!arguments.length)
-            return str;
-        var args = typeof arguments[0],
-            args = (("string" == args || "number" == args) ? arguments : arguments[0]);
-        for (arg in args)
-            str = str.replace(RegExp("\\{" + arg + "\\}", "gi"), args[arg]);
-        return str;
-    }
+var clockTimer,
+    clockDiv,
+    clockTemplate;
+
+function initClock() {
+    
+    clockDiv = document.querySelector("#clockDiv");
+    clockTemplate = generateTemplate("#clockTemplate");
+    
+    //instaciate the InternetClock Class
+    clock = new InternetClock();
+    
+    //timer
+    clockTimer = setInterval(clockTick, 1000);
 }
 
 
+function clockTick() {
+    
+    var date = clock.now();
+    
+    var obj = {
+        synced: clock.synced,
+        status: clock.status,
+        lastSync: new Date(clock.lastSync).toString(),
+        offset: clock.offset,
+        
+        HH: date.getHours(),
+        hh: ((date.getHours() + 11) % 12 + 1),
+        mm: AddZero(date.getMinutes()),
+        ss: AddZero(date.getSeconds()),
+        ms: AddZero(date.getMilliseconds()),
+        tt: date.getHours() >= 12 ? "PM" : "AM",
 
-/*!
- * Dynamically changing favicons with JavaScript
- * Works in all A-grade browsers except Safari and Internet Explorer
- * Demo: http://mathiasbynens.be/demo/dynamic-favicons
- */
-
-// HTML5™, baby! http://mathiasbynens.be/notes/document-head
-document.head = document.head || document.getElementsByTagName('head')[0];
-
-function changeFavicon(src) {
-    var link = document.createElement('link'),
-        oldLink = document.getElementById('dynamic-favicon');
-    link.id = 'dynamic-favicon';
-    link.rel = 'shortcut icon';
-    link.href = src;
-    if (oldLink) {
-        document.head.removeChild(oldLink);
-    }
-    document.head.appendChild(link);
+        dd: AddZero(date.getDate()),
+        ddd: ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"][date.getDay()],
+        dddd: ["Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sabado"][date.getDay()],
+        mo: AddZero(date.getMonth() + 1),
+        moo: ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"][date.getMonth()],
+        yy: date.getFullYear() - 2000,
+        yyyy: date.getFullYear(),
+        saudacao: (date.getHours() < 12) ? "Bom dia" : (date.getHours() < 18) ? "Boa tarde" : "Boa noite"
+    };
+    
+    clockDiv.innerHTML = clockTemplate.apply(obj);
+    
 }
+
+
 
 function initTitleChanging() {
 
@@ -70,32 +93,23 @@ function initTitleChanging() {
 }
 
 
+/*!
+ * Dynamically changing favicons with JavaScript
+ * Works in all A-grade browsers except Safari and Internet Explorer
+ * Demo: http://mathiasbynens.be/demo/dynamic-favicons
+ */
 
-function compileTemplate(html) {
-    var re = /{{([^}]*(?:}[^}]+)*}*)}}/g,
-        reExp = /(^( )?(if|for|else|switch|case|break|{|}))(.*)?/g,
-        code = 'var r=[];\n', cursor = 0, match;
-    
-    var add = function(line, js) {
-        js? (code += line.match(reExp) ? line + '\n' : 'r.push(' + line + ');\n') :
-            (code += line != '' ? 'r.push("' + line.replace(/"/g, '\\"') + '");\n' : '');
-        return add;
-    }
-    while(match = re.exec(html)) {
-        add(html.slice(cursor, match.index))(match[1], true);
-        cursor = match.index + match[0].length;
-    }
-    add(html.substr(cursor, html.length - cursor));
-    code += 'return r.join("");';
-    
-    var template = new Function(code.replace(/[\r\t\n]/g, ''));
-    return template;
-}
+// HTML5™, baby! http://mathiasbynens.be/notes/document-head
+document.head = document.head || document.getElementsByTagName('head')[0];
 
-function generateTemplate(selector){
-    var el = document.querySelector(selector);
-    if(el.type.toLowerCase()=="template/html"){
-        return compileTemplate(el.innerHTML);
+function changeFavicon(src) {
+    var link = document.createElement('link'),
+        oldLink = document.getElementById('dynamic-favicon');
+    link.id = 'dynamic-favicon';
+    link.rel = 'shortcut icon';
+    link.href = src;
+    if (oldLink) {
+        document.head.removeChild(oldLink);
     }
-    else throw Error("Type of '"+selector+"' is not a template/html");
+    document.head.appendChild(link);
 }
