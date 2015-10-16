@@ -1,60 +1,7 @@
-clearAllTimeouts();
-//clear all timeouts, hack fix for liveweave 
-function clearAllTimeouts(){
-    var maxId = setTimeout(function() {}, 0);
-    for (var i = 0; i < maxId; i += 1) {
-        clearTimeout(i);
-    }
-}
-
-var clockTimer,
-    clockDiv,
-    clockTemplate;
-
-function initClock() {
-    
-    clockDiv = document.querySelector("#clockDiv");
-    clockTemplate = generateTemplate("#clockTemplate");
-    
-    //instaciate the InternetClock Class
-    clock = new InternetClock();
-    
-    //timer
-    clockTimer = setInterval(clockTick, 1000);
-}
-
-function clockTick() {
-    
-    var date = clock.now();
-    
-    var obj = {
-        synced: clock.synced,
-        status: clock.status,
-        lastSync: new Date(clock.lastSync).toString(),
-        offset: clock.offset,
-        
-        HH: date.getHours(),
-        hh: ((date.getHours() + 11) % 12 + 1),
-        mm: AddZero(date.getMinutes()),
-        ss: AddZero(date.getSeconds()),
-        ms: AddZero(date.getMilliseconds()),
-        tt: date.getHours() >= 12 ? "PM" : "AM",
-
-        dd: AddZero(date.getDate()),
-        ddd: ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"][date.getDay()],
-        dddd: ["Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sabado"][date.getDay()],
-        mo: AddZero(date.getMonth() + 1),
-        moo: ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"][date.getMonth()],
-        yy: date.getFullYear() - 2000,
-        yyyy: date.getFullYear(),
-        saudacao: (date.getHours() < 12) ? "Bom dia" : (date.getHours() < 18) ? "Boa tarde" : "Boa noite"
-    };
-    
-    clockDiv.innerHTML = clockTemplate.apply(obj);
-    
-}
-
-
+/**
+ * InternetClock.js
+ * @author Victornpb github.com/victornpb
+ */
 
 function InternetClock() {
     var self = this;
