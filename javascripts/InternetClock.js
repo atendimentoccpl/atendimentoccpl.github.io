@@ -15,8 +15,13 @@ function InternetClock() {
     this.syncTriggered = false;
     
     this.requestTimeout = 1000*30;
+    
+    this.timezone = -3;
+    this.daylightSaving = true;
+    
+    this.debug = false;
 
-    function getWorldTime(onCompleted, onLoad, onFailed) {
+    function getUTCWorldTime(onCompleted, onLoad, onFailed) {
         
         if (onFailed) {
             var timer = setTimeout(function(){onFailed("Request timed out");}, self.requestTimeout);
@@ -49,7 +54,7 @@ function InternetClock() {
                         var json = JSON.parse(result);
                         if (onFailed) clearTimeout(timer);
                         var t = json["currentDateTime"];
-                        t = new Date(t);
+                        t = createDateAsUTC(new Date(t));
                     } catch (err) {
                         success = false;
                         if (onFailed) {
@@ -75,19 +80,19 @@ function InternetClock() {
     }
 
     this.sync = function(callback) {
-        //console.log("Clock Sync Requested");
+        if(self.debug) console.log("Clock Sync Requested");
         self.synced = false;
         self.status = "Sync Started";
 
-        getWorldTime(function(remoteDate) {
-                //console.log("Remote Clock Received", remoteDate);
+        getUTCWorldTime(function(remoteDate) {
+                if(self.debug) console.log("Remote Clock Received", remoteDate);
 
                 self.syncTriggered = false;
                 self.synced = true;
                 self.status = "Synced";
 
                 self.lastSync = Date.now();
-                self.calcOffset(new Date(remoteDate), new Date());
+                self.calcOffset(new Date(remoteDate), convertDateToUTC(new Date()));
                 if (callback) callback(self);
             },
             function(s) { //loading
@@ -116,7 +121,7 @@ function InternetClock() {
             self.sync();
         }
 
-        return new Date(date.getTime() + self.offset);
+        return new Date(date.getTime());
     };
 
     this.calcOffset = function calcOffset(dateLocal, dateRemote) {
@@ -124,8 +129,18 @@ function InternetClock() {
     };
 
     this.now = function() {
-        return self.getCompensatedDate(new Date());
+        var t = self.getCompensatedDate(convertDateToUTC(new Date()));
+        t.setHours(t.getHours() + self.timezone + (self.daylightSaving?1:0));
+        return t;
     };
+    
+    function createDateAsUTC(date) {
+        return new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds()));
+    }
+    
+    function convertDateToUTC(date) { 
+        return new Date(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate(), date.getUTCHours(), date.getUTCMinutes(), date.getUTCSeconds()); 
+    }
 }
 
 
