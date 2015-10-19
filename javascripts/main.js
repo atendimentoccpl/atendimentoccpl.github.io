@@ -137,7 +137,6 @@ function changeFavicon(src) {
 function ScreenSaver(){
     
     var self = this;
-    
     var timer = null;
     var debounceTimestamp;
     
