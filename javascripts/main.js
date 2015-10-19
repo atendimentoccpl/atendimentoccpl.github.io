@@ -134,13 +134,15 @@ function changeFavicon(src) {
 
 function ScreenSaver(){
     
-	var self = this;
+    var self = this;
     
     var timer = null;
+    var debounceTimestamp;
     
     this.enabled = false;
     this.visible = false;
     this.timeout = 1000*60;
+    this.debouce = 500;
     
     this.onEnter = function(){};
     this.onExit = function(){};
@@ -212,6 +214,8 @@ function ScreenSaver(){
     }
     
     function eventListener(event){
+        
+        if(Date.now()<(debounceTimestamp+self.debounce)) return;
 		
         if(self.enabled){
 
@@ -229,6 +233,8 @@ function ScreenSaver(){
         if(self.onEnter) self.onEnter();
         if(self.element) self.element.style.display = "block";
         self.visible = true;
+        
+        debounceTimestamp = Date.now();
     }
     
     function exit(ev){
