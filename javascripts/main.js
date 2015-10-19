@@ -250,9 +250,9 @@ function ScreenSaver(){
     
     function exit(event){
         
-        if(((Date.now()-debounceTimestamp)<self.debounceMousemove) || mousemoveCount<self.mouseDebounce){
-			if(self.debug) console.log("ScreenSaver","debounced");
-			return;
+        if(((Date.now()-debounceTimestamp)<self.debounceMousemove) && (mousemoveCount<=self.debounceMousemove)){
+		if(self.debug) console.log("ScreenSaver","debounced");
+		return;
         }
         
         if(self.debug) console.log("ScreenSaver","exit", event);
