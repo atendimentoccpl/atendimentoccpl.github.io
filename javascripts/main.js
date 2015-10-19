@@ -14,23 +14,7 @@ window.onload = function() {
     initClock();
     initTitleChanging();
     
-    
-    window.ss = new ScreenSaver();
-    ss.debug = true;
-    ss.timeout = 1000*30;
-    
-    ss.element = document.querySelector("#screensaver");
-    
-    ss.onEnter = function(){
-    	document.querySelector("#contentFrame").style.display = "none";
-    	document.querySelector("#screensaver iframe").src = "home.html#screensaver";
-    }
-    ss.onExit = function(){
-    	document.querySelector("#contentFrame").style.display = "block";
-    	document.querySelector("#screensaver iframe").src = "about:blank";
-    }
-    
-    ss.init();
+    initScreensaver();
 }
 
 
@@ -131,6 +115,27 @@ function changeFavicon(src) {
     document.head.appendChild(link);
 }
 
+
+function initScreensaver(){
+	window.ss = new ScreenSaver();
+	
+    ss.debug = true;
+    ss.timeout = 1000*30;
+    
+    ss.element = document.querySelector("#screensaver");
+    
+    ss.onEnter = function(){
+    	document.querySelector("#contentFrame").style.display = "none";
+    	document.querySelector("#screensaver iframe").src = "home.html#screensaver";
+    }
+    ss.onExit = function(){
+    	document.querySelector("#contentFrame").style.display = "block";
+    	document.querySelector("#screensaver iframe").src = "about:blank";
+    }
+    
+    ss.init();
+    
+}
 
 function ScreenSaver(){
     
