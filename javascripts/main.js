@@ -13,7 +13,22 @@ window.onload = function() {
 
     initClock();
     initTitleChanging();
-
+    
+    
+    window.ss = new ScreenSaver();
+    ss.debug = true;
+    ss.timeout = 1000*30;
+    
+    ss.element = document.querySelector("#screensaver");
+    
+    ss.onEnter = function(){
+    	document.querySelector("#screensaver iframe").src = "home.html#screensaver";
+    }
+    ss.onExit = function(){
+    	document.querySelector("#screensaver iframe").src = "about:blank";
+    }
+    
+    ss.init();
 }
 
 
@@ -112,4 +127,115 @@ function changeFavicon(src) {
         document.head.removeChild(oldLink);
     }
     document.head.appendChild(link);
+}
+
+
+
+
+function ScreenSaver(){
+    
+	var self = this;
+    
+    var timer = null;
+    
+    this.enabled = false;
+    this.visible = false;
+    this.timeout = 1000*60;
+    
+    this.onEnter = function(){};
+    this.onExit = function(){};
+    
+    this.element = null;    
+    this.debug = false;
+    
+	this.init = function(){
+        
+        if(self.debug) console.log("ScreenSaver","init");
+        
+        //mouse
+        document.addEventListener('mousemove', eventListener, false);
+        document.addEventListener('mousewheel', eventListener, false);
+        document.addEventListener('mousedown', eventListener, false);
+        document.addEventListener('mouseup', eventListener, false);
+        
+        //keyboard
+        document.addEventListener('keypress', eventListener, false);
+        document.addEventListener('keydown', eventListener, false);
+        document.addEventListener('keyup', eventListener, false);
+        
+        //touch
+        document.addEventListener('touchstart', eventListener, false);
+        document.addEventListener('touchdown', eventListener, false);
+        document.addEventListener('touchup', eventListener, false);
+        
+        //browser
+        document.addEventListener('scroll', eventListener, false);
+		
+        //start timer
+        resetTimer();
+        
+        self.enabled = true;
+    }
+    
+    this.destroy = function(){
+        
+        if(self.debug) console.log("ScreenSaver","destroy");
+        
+        //mouse
+        document.removeEventListener('mousemove', eventListener);
+        document.removeEventListener('mousewheel', eventListener);
+        document.removeEventListener('mousedown', eventListener);
+        document.removeEventListener('mouseup', eventListener);
+        
+        //keyboard
+        document.removeEventListener('keypress', eventListener);
+        document.removeEventListener('keydown', eventListener);
+        document.removeEventListener('keyup', eventListener);
+        
+        //touch
+        document.removeEventListener('touchstart', eventListener);
+        document.removeEventListener('touchdown', eventListener);
+        document.removeEventListener('touchup', eventListener);
+        
+        //browser
+        document.removeEventListener('scroll', eventListener);
+        
+    	clearTimeout(timer);
+        exit("destroy");
+        
+        self.enabled = false;
+    }
+	
+    function resetTimer(){
+    	if(timer) clearTimeout(timer);
+        timer = setTimeout(enter, self.timeout);
+    }
+    
+    function eventListener(event){
+		
+        if(self.enabled){
+
+            if(self.visible){
+                exit(event.type);
+            }
+
+            resetTimer();
+        }
+    }
+    
+    function enter(){
+        if(self.debug) console.log("ScreenSaver","enter");
+        
+        if(self.onEnter) self.onEnter();
+        if(self.element) self.element.style.display = "block";
+        self.visible = true;
+    }
+    
+    function exit(ev){
+        if(self.debug) console.log("ScreenSaver","exit", ev);
+        
+        if(self.onExit) self.onExit();
+        if(self.element) self.element.style.display = "none";
+        self.visible = false;
+    }
 }
