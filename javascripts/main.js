@@ -22,9 +22,11 @@ window.onload = function() {
     ss.element = document.querySelector("#screensaver");
     
     ss.onEnter = function(){
+    	document.querySelector("#contentFrame").style.display = "none";
     	document.querySelector("#screensaver iframe").src = "home.html#screensaver";
     }
     ss.onExit = function(){
+    	document.querySelector("#contentFrame").style.display = "block";
     	document.querySelector("#screensaver iframe").src = "about:blank";
     }
     
@@ -142,7 +144,7 @@ function ScreenSaver(){
     this.enabled = false;
     this.visible = false;
     this.timeout = 1000*60;
-    this.debouce = 500;
+    this.debouce = 1000;
     
     this.onEnter = function(){};
     this.onExit = function(){};
@@ -214,8 +216,8 @@ function ScreenSaver(){
     }
     
     function eventListener(event){
-        
-        if(Date.now()<(debounceTimestamp+self.debounce)) return;
+    	
+    	if(self.debug) console.log("ScreenSaver","event", event);
 		
         if(self.enabled){
 
@@ -229,16 +231,20 @@ function ScreenSaver(){
     
     function enter(){
         if(self.debug) console.log("ScreenSaver","enter");
+        debounceTimestamp = Date.now();
         
         if(self.onEnter) self.onEnter();
         if(self.element) self.element.style.display = "block";
         self.visible = true;
-        
-        debounceTimestamp = Date.now();
     }
     
     function exit(ev){
         if(self.debug) console.log("ScreenSaver","exit", ev);
+        
+        if(Date.now()<(debounceTimestamp+self.debounce)){
+			if(self.debug) console.log("ScreenSaver","debounced");
+			return;
+        }
         
         if(self.onExit) self.onExit();
         if(self.element) self.element.style.display = "none";
