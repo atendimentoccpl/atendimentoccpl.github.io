@@ -5,26 +5,26 @@
 
 function InternetClock() {
     var self = this;
-
-    this.offset = 0;
-    this.lastSync = 0;
-    this.syncExpire = 1000 * 60 * 5; //resync with internet every 5 minutes
-
-    this.status = "Hora Local";
-    this.synced = false;
-    this.syncTriggered = false;
     
-    this.requestTimeout = 1000*30;
+    this.debug = false;
     
     this.timezone = -3;
     this.daylightSaving = true;
     
-    this.debug = false;
-
+    this.offset = 0;
+    this.lastSync = 0;
+    this.syncExpire = 1000 * 60 * 5; //resync with internet every 5 minutes
+    
+    this.synced = false;
+    this.syncTriggered = false;
+    this.status = "Hora Local";
+    
+    this.requestTimeout = 1000*30;
+    
     function getUTCWorldTime(onCompleted, onLoad, onFailed) {
         
         if (onFailed) {
-            var timer = setTimeout(function(){onFailed("Request timed out");}, self.requestTimeout);
+            var timer = setTimeout(function(){ onFailed("Request timed out"); }, self.requestTimeout);
         }
         var parameters = "";
         var url = "http://worldclockapi.com/api/json/utc/now";
