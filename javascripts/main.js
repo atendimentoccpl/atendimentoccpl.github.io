@@ -132,17 +132,18 @@ function changeFavicon(src) {
 }
 
 
-
 function ScreenSaver(){
     
     var self = this;
     var timer = null;
     var debounceTimestamp;
+    var mousemoveCount = 0;
     
     this.enabled = false;
     this.visible = false;
     this.timeout = 1000*60;
     this.debounce = 1000;
+    this.debounceMousemove = 3;
     
     this.onEnter = function(){};
     this.onExit = function(){};
@@ -220,6 +221,11 @@ function ScreenSaver(){
         if(self.enabled){
 
             if(self.visible){
+                
+                if(event.type=="mousemove"){
+                	mousemoveCount++;
+                }
+                
                 exit(event.type);
             }
 
@@ -227,7 +233,8 @@ function ScreenSaver(){
         }
     }
     
-    function enter(){
+    function enter(event){
+        mousemoveCount = 0;
         debounceTimestamp = Date.now();
         if(self.debug) console.log("ScreenSaver","enter", debounceTimestamp);
               
@@ -236,13 +243,14 @@ function ScreenSaver(){
         self.visible = true;
     }
     
-    function exit(ev){
-        if((Date.now()-debounceTimestamp)<self.debounce){
+    function exit(event){
+        
+        if(((Date.now()-debounceTimestamp)<self.debounceMousemove) || mousemoveCount<self.mouseDebounce){
 			if(self.debug) console.log("ScreenSaver","debounced");
 			return;
         }
         
-        if(self.debug) console.log("ScreenSaver","exit", ev);
+        if(self.debug) console.log("ScreenSaver","exit", event);
         if(self.onExit) self.onExit();
         if(self.element) self.element.style.display = "none";
         self.visible = false;
