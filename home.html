@@ -106,9 +106,21 @@
     var currentBgUrl;
 
     var clock;
+    
+    function ready(fn) {
+      if (document.readyState != 'loading'){
+        fn();
+      } else if (document.addEventListener) {
+        document.addEventListener('DOMContentLoaded', fn);
+      } else {
+        document.attachEvent('onreadystatechange', function() {
+          if (document.readyState != 'loading')
+            fn();
+        });
+      }
+    }
 
-    window.onload = function() {
-
+    ready(function() {
         clock = new InternetClock();
         clock.syncExpire = 1000 * 60 * 60 * 1; // resync every 1 hour
         clock.sync();
@@ -135,10 +147,9 @@
             clockTimer = setInterval(clockTick, 1000);
             
             screensaverDiv.style.display="block";
-            
         }
 
-    };
+    });
 
 
     function setRandomBG(i) {
