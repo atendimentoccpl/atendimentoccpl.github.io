@@ -111,13 +111,13 @@
                         <span id="clockDiv">Loading...</span>
                         
                         <script id="clockTemplate" type="template/html">
-                            <span title="Status:{{this.status}} - Ultima sincronização (Hora Local): {{this.lastSync}}">
+                            <span>
                                 <span class="status {{this.synced?'synced':'unsynced'}}">{{this.status}}</span>
                                 
-                                <span class="saudacao">{{this.saudacao}},</span>
-                                <span class="week">{{this.ddd}}</span>
-                                <span class="date">{{this.dd}}/{{this.moo}}/{{this.yy}}</span>
-                                <span class="clock" class="{{this.synced?'synced':'unsynced'}}">
+                                <span class="saudacao" title="Status:{{this.status}} - Ultima sincronização (Hora Local): {{this.lastSync}}">{{this.saudacao}},</span>
+                                <span class="week" title="{{this.ddddd}}">{{this.ddd}}</span>
+                                <span class="date" title="{{this.ddddd}}, {{this.dd}} de {{this.mooo}} de {{this.yyyy}">{{this.dd}}/{{this.mo}}/{{this.yy}}</span>
+                                <span class="clock {{this.synced?'synced':'unsynced'}}" title="{{this.HH}}:{{this.mm}}">
                                     <span class="hh">{{this.hh}}</span>:<span class="mm">{{this.mm}}</span>:<span class="ss">{{this.ss}}</span>
                                     <span class="tt">{{this.tt}}</span>
                                 </span>
