@@ -1,23 +1,25 @@
-clearAllTimeouts();
-//clear all timeouts, hack fix for liveweave 
-function clearAllTimeouts() {
-    var maxId = setTimeout(function() {}, 0);
-    for (var i = 0; i < maxId; i += 1) {
-        clearTimeout(i);
-    }
+function ready(fn) {
+  if (document.readyState != 'loading'){
+    fn();
+  } else if (document.addEventListener) {
+    document.addEventListener('DOMContentLoaded', fn);
+  } else {
+    document.attachEvent('onreadystatechange', function() {
+      if (document.readyState != 'loading')
+        fn();
+    });
+  }
 }
 
-var pageTitle = "CCPL";
-
-window.onload = function() {
+ready(function() {
 
     initClock();
     initTitleChanging();
 
     initScreensaver();
-}
+});
 
-
+var pageTitle = "CCPL";
 
 var clockTimer,
     clockDiv,
@@ -66,7 +68,6 @@ function clockTick() {
     clockDiv.innerHTML = clockTemplate.apply(obj);
 
 }
-
 
 
 function initTitleChanging() {
@@ -135,6 +136,7 @@ function initScreensaver() {
 
     ss.init();
 }
+
 
 function ScreenSaver() {
 
