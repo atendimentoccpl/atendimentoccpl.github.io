@@ -41,32 +41,15 @@ function initClock() {
 function clockTick() {
 
     var date = clock.now();
-
-    var obj = {
-        synced: clock.synced,
-        status: clock.status,
-        lastSync: new Date(clock.lastSync).toString(),
-        offset: clock.offset,
-
-        HH: date.getHours(),
-        hh: ((date.getHours() + 11) % 12 + 1),
-        mm: AddZero(date.getMinutes()),
-        ss: AddZero(date.getSeconds()),
-        ms: AddZero(date.getMilliseconds()),
-        tt: date.getHours() >= 12 ? "PM" : "AM",
-
-        dd: AddZero(date.getDate()),
-        ddd: ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"][date.getDay()],
-        dddd: ["Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sabado"][date.getDay()],
-        mo: AddZero(date.getMonth() + 1),
-        moo: ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"][date.getMonth()],
-        yy: date.getFullYear() - 2000,
-        yyyy: date.getFullYear(),
-        saudacao: (date.getHours() < 12) ? "Bom dia" : (date.getHours() < 18) ? "Boa tarde" : "Boa noite"
-    };
-
+    var obj = dateToObj(date);
+    
+    //append aditional data to obj
+    obj.synced = clock.synced,
+    obj.status = clock.status,
+    obj.lastSync = new Date(clock.lastSync).toString(),
+    obj.offset = clock.offset,
+    
     clockDiv.innerHTML = clockTemplate.apply(obj);
-
 }
 
 
