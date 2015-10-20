@@ -119,7 +119,7 @@ function changeFavicon(src) {
 function initScreensaver() {
     window.ss = new ScreenSaver();
 
-    ss.debug = true;
+    //ss.debug = true;
     ss.timeout = 1000 * 30;
 
     ss.element = document.querySelector("#screensaver");
@@ -146,7 +146,7 @@ function ScreenSaver() {
     this.enabled = false;
     this.visible = false;
     this.timeout = 1000 * 60;
-    this.debounce = 1000;
+    this.debounce = 500;
     this.debounceMousemove = 3;
 
     this.onEnter = function() {};
