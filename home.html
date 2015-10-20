@@ -34,36 +34,37 @@
     #screensaverDiv{
         dislay: none;
     }
+        
+    #screensaverDiv{
+      position: absolute;
+      width: 100%;
+      bottom: 0;
+    }
     
-#screensaverDiv{
-  position: absolute;
-  width: 100%;
-  bottom: 0;
-  margin: 1em;
-}
-
-.wallclock{
-  font-family: "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
-  font-weight: lighter;
-  font-size: 30pt;
-  color: white;
-  text-shadow: 2px 2px 4px #333333;
-}
-.saudacao{
-  display: block;
-}
-
-.clock{
-  display: block;
-}
-.clock .hh,
-.clock .mm{
-  font-size: 1.5em;
-}
-
-.date{
-  display: block;
-}
+    .wallclock{
+      font-family: "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
+      font-weight: lighter;
+      font-size: 30pt;
+      color: white;
+      text-shadow: 2px 2px 4px #333333;
+      
+      margin: 1em;
+    }
+    .saudacao{
+      display: block;
+    }
+    
+    .clock{
+      display: block;
+    }
+    .clock .hh,
+    .clock .mm{
+      font-size: 1.5em;
+    }
+    
+    .date{
+      display: block;
+    }
 </style>
 <script src="/javascripts/templating.js"></script>
 <script src="/javascripts/InternetClock.js"></script>
@@ -106,6 +107,8 @@
         
         //screensaver mode
         if(location.hash.match(/screensaver/)){
+            
+            document.getElementById("bg").style.opacity = 0.9;
             
             clockDiv = document.querySelector("#clockDiv");
             clockTemplate = generateTemplate("#clockTemplate");
@@ -235,6 +238,7 @@
 </script>
 </head>
 <body>
+    
     <div id="screensaverDiv">
         <script id="clockTemplate" type="template/html">
             <span class="wallclock" title="Status:{{this.status}} - Ultima sincronização (Hora Local): {{this.lastSync}}">
@@ -250,6 +254,7 @@
             </span>
         </script>
     </div>
+    
     <div id="bg"></div>
 
 </body>
