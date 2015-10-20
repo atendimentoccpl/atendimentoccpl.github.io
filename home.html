@@ -34,6 +34,36 @@
     #screensaverDiv{
         dislay: none;
     }
+    
+#screensaverDiv{
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  margin: 1em;
+}
+
+.wallclock{
+  font-family: "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
+  font-weight: lighter;
+  font-size: 30pt;
+  color: white;
+  text-shadow: 2px 2px 4px #333333;
+}
+.saudacao{
+  display: block;
+}
+
+.clock{
+  display: block;
+}
+.clock .hh,
+.clock .mm{
+  font-size: 1.5em;
+}
+
+.date{
+  display: block;
+}
 </style>
 <script src="/javascripts/templating.js"></script>
 <script src="/javascripts/InternetClock.js"></script>
@@ -207,16 +237,16 @@
 <body>
     <div id="screensaverDiv">
         <script id="clockTemplate" type="template/html">
-            <span title="Status:{{this.status}} - Ultima sincronização (Hora Local): {{this.lastSync}}">
+            <span class="wallclock" title="Status:{{this.status}} - Ultima sincronização (Hora Local): {{this.lastSync}}">
                 <span class="status {{this.synced?'synced':'unsynced'}}">{{this.status}}</span>
                 
                 <span class="saudacao">{{this.saudacao}},</span>
-                <span class="week">{{this.ddd}}</span>
-                <span class="date">{{this.dd}}/{{this.moo}}/{{this.yy}}</span>
+                
                 <span class="clock" class="{{this.synced?'synced':'unsynced'}}">
-                    <span class="hh">{{this.hh}}</span>:<span class="mm">{{this.mm}}</span>:<span class="ss">{{this.ss}}</span>
+                  <span class="hh">{{this.hh}}</span><span class="mm">:{{this.mm}}</span><span class="ss">:{{this.ss}}</span>
                     <span class="tt">{{this.tt}}</span>
                 </span>
+                <span class="date"><span class="week">{{this.dddd}},</span> {{this.dd}} de {{this.mooo}} de {{this.yyyy}}</span>
             </span>
         </script>
     </div>
