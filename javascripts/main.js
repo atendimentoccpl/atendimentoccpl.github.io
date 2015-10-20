@@ -1,6 +1,6 @@
 clearAllTimeouts();
 //clear all timeouts, hack fix for liveweave 
-function clearAllTimeouts(){
+function clearAllTimeouts() {
     var maxId = setTimeout(function() {}, 0);
     for (var i = 0; i < maxId; i += 1) {
         clearTimeout(i);
@@ -13,7 +13,7 @@ window.onload = function() {
 
     initClock();
     initTitleChanging();
-    
+
     initScreensaver();
 }
 
@@ -24,28 +24,28 @@ var clockTimer,
     clockTemplate;
 
 function initClock() {
-    
+
     clockDiv = document.querySelector("#clockDiv");
     clockTemplate = generateTemplate("#clockTemplate");
-    
+
     //instaciate the InternetClock Class
     clock = new InternetClock();
-    
+
     //timer
     clockTimer = setInterval(clockTick, 1000);
 }
 
 
 function clockTick() {
-    
+
     var date = clock.now();
-    
+
     var obj = {
         synced: clock.synced,
         status: clock.status,
         lastSync: new Date(clock.lastSync).toString(),
         offset: clock.offset,
-        
+
         HH: date.getHours(),
         hh: ((date.getHours() + 11) % 12 + 1),
         mm: AddZero(date.getMinutes()),
@@ -62,9 +62,9 @@ function clockTick() {
         yyyy: date.getFullYear(),
         saudacao: (date.getHours() < 12) ? "Bom dia" : (date.getHours() < 18) ? "Boa tarde" : "Boa noite"
     };
-    
+
     clockDiv.innerHTML = clockTemplate.apply(obj);
-    
+
 }
 
 
@@ -116,148 +116,152 @@ function changeFavicon(src) {
 }
 
 
-function initScreensaver(){
-	window.ss = new ScreenSaver();
-	
+function initScreensaver() {
+    window.ss = new ScreenSaver();
+
     ss.debug = true;
-    ss.timeout = 1000*30;
-    
+    ss.timeout = 1000 * 30;
+
     ss.element = document.querySelector("#screensaver");
-    
-    ss.onEnter = function(){
-    	document.querySelector("#contentFrame").style.display = "none";
-    	document.querySelector("#screensaver iframe").src = "home.html#screensaver";
+
+    ss.onEnter = function() {
+        document.querySelector("#contentFrame").style.display = "none";
+        document.querySelector("#screensaver iframe").src = "home.html#screensaver";
     }
-    ss.onExit = function(){
-    	document.querySelector("#contentFrame").style.display = "block";
-    	document.querySelector("#screensaver iframe").src = "about:blank";
+    ss.onExit = function() {
+        document.querySelector("#contentFrame").style.display = "block";
+        document.querySelector("#screensaver iframe").src = "about:blank";
     }
-    
+
     ss.init();
-    
 }
 
-function ScreenSaver(){
-    
+function ScreenSaver() {
+
     var self = this;
     var timer = null;
     var debounceTimestamp;
     var mousemoveCount = 0;
-    
+
     this.enabled = false;
     this.visible = false;
-    this.timeout = 1000*60;
+    this.timeout = 1000 * 60;
     this.debounce = 1000;
     this.debounceMousemove = 3;
-    
-    this.onEnter = function(){};
-    this.onExit = function(){};
-    
-    this.element = null;    
+
+    this.onEnter = function() {};
+    this.onExit = function() {};
+
+    this.element = null;
     this.debug = false;
-    
-	this.init = function(){
-        
-        if(self.debug) console.log("ScreenSaver","init");
-        
+
+    this.init = function() {
+
+        if (self.debug) console.log("ScreenSaver", "init");
+
         //mouse
         document.addEventListener('mousemove', eventListener, false);
         document.addEventListener('mousewheel', eventListener, false);
         document.addEventListener('mousedown', eventListener, false);
         document.addEventListener('mouseup', eventListener, false);
-        
+
         //keyboard
         document.addEventListener('keypress', eventListener, false);
         document.addEventListener('keydown', eventListener, false);
         document.addEventListener('keyup', eventListener, false);
-        
+
         //touch
         document.addEventListener('touchstart', eventListener, false);
         document.addEventListener('touchdown', eventListener, false);
         document.addEventListener('touchup', eventListener, false);
-        
+
         //browser
         document.addEventListener('scroll', eventListener, false);
-		
+
         //start timer
         resetTimer();
-        
+
         self.enabled = true;
     }
-    
-    this.destroy = function(){
-        
-        if(self.debug) console.log("ScreenSaver","destroy");
-        
+
+    this.destroy = function() {
+
+        if (self.debug) console.log("ScreenSaver", "destroy");
+
         //mouse
         document.removeEventListener('mousemove', eventListener);
         document.removeEventListener('mousewheel', eventListener);
         document.removeEventListener('mousedown', eventListener);
         document.removeEventListener('mouseup', eventListener);
-        
+
         //keyboard
         document.removeEventListener('keypress', eventListener);
         document.removeEventListener('keydown', eventListener);
         document.removeEventListener('keyup', eventListener);
-        
+
         //touch
         document.removeEventListener('touchstart', eventListener);
         document.removeEventListener('touchdown', eventListener);
         document.removeEventListener('touchup', eventListener);
-        
+
         //browser
         document.removeEventListener('scroll', eventListener);
-        
-    	clearTimeout(timer);
+
+        clearTimeout(timer);
         exit("destroy");
-        
+
         self.enabled = false;
     }
-	
-    function resetTimer(){
-    	if(timer) clearTimeout(timer);
+
+    function resetTimer() {
+        if (timer) clearTimeout(timer);
         timer = setTimeout(enter, self.timeout);
     }
-    
-    function eventListener(event){
-    	
-    	//if(self.debug) console.log("ScreenSaver","event", event);
-		
-        if(self.enabled){
 
-            if(self.visible){
-                
-                if(event.type=="mousemove"){
-                	mousemoveCount++;
+    function eventListener(event) {
+
+        //if(self.debug) console.log("ScreenSaver","event", event);
+
+        if (self.enabled) {
+
+            if (self.visible) {
+
+                if (event.type == "mousemove") {
+                    mousemoveCount++;
                 }
-                
+
                 exit(event.type);
             }
 
             resetTimer();
         }
     }
-    
-    function enter(event){
+
+    function enter(event) {
         mousemoveCount = 0;
         debounceTimestamp = Date.now();
-        if(self.debug) console.log("ScreenSaver","enter", debounceTimestamp);
-              
-        if(self.onEnter) self.onEnter();
-        if(self.element) self.element.style.display = "block";
+        if (self.debug) console.log("ScreenSaver", "enter", debounceTimestamp);
+
+        if (self.onEnter) self.onEnter();
+        if (self.element) self.element.style.display = "block";
         self.visible = true;
     }
-    
-    function exit(event){
-        
-        if(((Date.now()-debounceTimestamp)<self.debounceMousemove) && (mousemoveCount<=self.debounceMousemove)){
-		if(self.debug) console.log("ScreenSaver","debounced");
-		return;
+
+    function exit(event) {
+
+        if ((Date.now() - debounceTimestamp) < self.debounce) {
+            if (self.debug) console.log("ScreenSaver", "debounced");
+            return;
         }
         
-        if(self.debug) console.log("ScreenSaver","exit", event);
-        if(self.onExit) self.onExit();
-        if(self.element) self.element.style.display = "none";
+        if (event=="mousemove" && mousemoveCount <= self.debounceMousemove) {
+            if (self.debug) console.log("ScreenSaver", "mousemove debounced");
+            return;
+        }
+
+        if (self.debug) console.log("ScreenSaver", "exit", event);
+        if (self.onExit) self.onExit();
+        if (self.element) self.element.style.display = "none";
         self.visible = false;
     }
 }
