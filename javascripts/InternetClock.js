@@ -153,3 +153,25 @@ function InternetClock() {
 function AddZero(num) {
     return (num >= 0 && num < 10) ? "0" + num : num + "";
 }
+
+function dateToObj(date){
+    return ({
+        HH: date.getHours(),
+        hh: ((date.getHours() + 11) % 12 + 1),
+        mm: AddZero(date.getMinutes()),
+        ss: AddZero(date.getSeconds()),
+        ms: AddZero(date.getMilliseconds()),
+        tt: date.getHours() >= 12 ? "PM" : "AM",
+        
+        dd: AddZero(date.getDate()),
+        ddd: ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"][date.getDay()],
+        dddd: ["Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sabado"][date.getDay()],
+        ddddd: ["Domingo", "Segunda-feira", "Terça-feira", "Quarta-feira", "Quinta-feira", "Sexta-feira", "Sabado"][date.getDay()],
+        mo: AddZero(date.getMonth() + 1),
+        moo: ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"][date.getMonth()],
+        mooo: ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"][date.getMonth()],
+        yy: date.getFullYear() - 2000,
+        yyyy: date.getFullYear(),
+        saudacao: (date.getHours() < 12) ? "Bom dia" : (date.getHours() < 18) ? "Boa tarde" : "Boa noite"
+    });
+}
