@@ -269,7 +269,7 @@
                 <span class="saudacao" title="Status:{{this.status}} - Ultima sincronização (Hora Local): {{this.lastSync}}">{{this.saudacao}},</span>
                 
                 <span class="clock {{this.synced?'synced':'unsynced'}}" title="{{storage.data.config.timeFormat==12?this.HH:this.hh}}:{{this.mm}}">
-                  <span class="hh">{{storage.data.config.timeFormat==12?this.HH:this.hh}}</span><span class="mm">:{{this.mm}}</span><span class="ss">:{{this.ss}}</span>
+                  <span class="hh">{{storage.data.config.timeFormat==12?this.hh:this.HH}}</span><span class="mm">:{{this.mm}}</span><span class="ss">:{{this.ss}}</span>
                   <span class="tt {{storage.data.config.timeFormat==12?'':'hidden'}}">{{this.tt}}</span>
                 </span>
                 <span class="date" title="{{this.dd}}/{{this.mo}}/{{this.yy}}"><span class="week">{{this.ddddd}},</span> {{this.dd}} de {{this.mooo}} de {{this.yyyy}}</span>
