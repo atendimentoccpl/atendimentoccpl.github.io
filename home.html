@@ -83,9 +83,12 @@
 
 
 </style>
-<script src="/javascripts/templating.js"></script>
+<script src="/javascripts/common.js"></script>
 <script src="/javascripts/InternetClock.js"></script>
 <script type="text/javascript">
+
+    var storage;
+    
     var timer;
 
     var MODES = {
@@ -121,6 +124,13 @@
     }
 
     ready(function() {
+        
+        storage = new Storage('AppCcpl');
+        storage.data = {
+            
+        };
+        storage.load();
+        
         clock = new InternetClock();
         clock.syncExpire = 1000 * 60 * 60 * 1; // resync every 1 hour
         clock.sync();
