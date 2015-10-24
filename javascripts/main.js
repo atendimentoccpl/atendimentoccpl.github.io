@@ -1,29 +1,22 @@
-function ready(fn) {
-  if (document.readyState != 'loading'){
-    fn();
-  } else if (document.addEventListener) {
-    document.addEventListener('DOMContentLoaded', fn);
-  } else {
-    document.attachEvent('onreadystatechange', function() {
-      if (document.readyState != 'loading')
-        fn();
-    });
-  }
-}
-
-ready(function() {
-
-    initClock();
-    initTitleChanging();
-
-    initScreensaver();
-});
-
 var pageTitle = "CCPL";
+var storage;
 
 var clockTimer,
     clockDiv,
     clockTemplate;
+    
+ready(function() {
+  
+  storage = new Storage("AppCcpl");
+  storage.load();
+  
+  initClock();
+  initTitleChanging();
+
+  initScreensaver();
+});
+
+
 
 function initClock() {
 
