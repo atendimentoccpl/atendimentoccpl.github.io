@@ -231,7 +231,7 @@ var storage;
 
 window.onload = function() {
 
-    var storage = new Storage("AppCcpl");
+    storage = new Storage("AppCcpl");
     storage.load();
     formStorage.loadFormFromObject(document.formPreferencias, storage.data.formState);
 
