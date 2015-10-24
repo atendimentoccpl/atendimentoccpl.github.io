@@ -1,3 +1,17 @@
+function ready(fn) {
+  if (document.readyState != 'loading'){
+    fn();
+  } else if (document.addEventListener) {
+    document.addEventListener('DOMContentLoaded', fn);
+  } else {
+    document.attachEvent('onreadystatechange', function() {
+      if (document.readyState != 'loading')
+        fn();
+    });
+  }
+}
+
+
 function compileTemplate(html) {
     var re = /{{([^}]*(?:}[^}]+)*}*)}}/g,
         reExp = /(^( )?(if|for|else|switch|case|break|{|}))(.*)?/g,
@@ -26,6 +40,8 @@ function generateTemplate(selector){
     }
     else throw Error("Type of '"+selector+"' is not a template/html");
 }
+
+
 
 if (!String.prototype.formatWithObj) {
     String.prototype.formatWithObj = function() {
