@@ -32,6 +32,9 @@ function initClock() {
 
     //instaciate the InternetClock Class
     clock = new InternetClock();
+    
+    clock.timezone = storage.data.config.timezone;
+    clock.daylightSaving  = storage.data.config.daylightsaving;
 
     //timer
     clockTimer = setInterval(clockTick, 1000);
