@@ -168,17 +168,17 @@
 
 <!-- Multiple Radios -->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="radios">Formato de Data</label>
+  <label class="col-md-4 control-label" for="monthFormat">Formato de Data</label>
   <div class="col-md-4">
   <div class="radio">
     <label for="dateformat-0">
-      <input type="radio" name="radios" id="dateformat-0" value="mm" checked="checked">
+      <input type="radio" name="monthFormat" id="monthFormat-0" value="mo" checked="checked">
       DD/MM/YY (31/12/15)
     </label>
 	</div>
   <div class="radio">
     <label for="dateformat-1">
-      <input type="radio" name="radios" id="dateformat-1" value="mmm">
+      <input type="radio" name="monthFormat" id="monthFormat-1" value="moo">
       DD/MMM/YY (31/DEZ/15)
     </label>
 	</div>
@@ -244,6 +244,8 @@ function salvarConfigs(e) {
     var obj = formStorage.saveFormToObject(document.formPreferencias);
     storage.data = obj;
     storage.save();
+    
+    alert("Salvado!\n Atualize a página.");
 }
 
 </script>
