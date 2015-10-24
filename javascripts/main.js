@@ -107,7 +107,7 @@ function initScreensaver() {
     window.ss = new ScreenSaver();
 
     //ss.debug = true;
-    ss.timeout = 1000 * 30;
+    ss.timeout = storage.data.config.screensaverSettings;
 
     ss.element = document.querySelector("#screensaver");
 
@@ -203,13 +203,19 @@ function ScreenSaver() {
 
     function resetTimer() {
         if (timer) clearTimeout(timer);
-        timer = setTimeout(enter, self.timeout);
+        if(self.timeout>0){
+          timer = setTimeout(enter, self.timeout);
+        }
+        else{
+          self.enabled = false;
+        }
     }
 
     function eventListener(event) {
 
         //if(self.debug) console.log("ScreenSaver","event", event);
-
+        if(self.timeout==0) self.enabled = false;
+        
         if (self.enabled) {
 
             if (self.visible) {
