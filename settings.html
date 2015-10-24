@@ -219,7 +219,7 @@
     <div class="form-group">
       <label class="col-md-4 control-label" for="singlebutton">Single Button</label>
       <div class="col-md-4">
-        <button id="singlebutton" name="singlebutton" class="btn btn-primary" onclick="salvar(); return false">Salvar</button>
+          <input type="button" id="savebutton" name="singlebutton" class="btn btn-primary" value="Salvar">
       </div>
     </div>
 
@@ -227,48 +227,54 @@
 </form>
 
 <script>
-
 var storage = new Storage("AppCcpl");
 
-window.onload = function(){
+window.onload = function() {
+
+    savebutton.onclick = salvar;
     storage.load();
-    formStorage.loadFormFromObject(document.formPreferencias, storage.data);
+    formStorage.loadFormFromObject(document.formPreferencias, storage.data.formState);
 }
 
-function salvar(){
-     storage.data = formStorage.saveFormToObject(document.formPreferencias);
-     storage.save();
+function salvar(e) {
+    e.preventDefault();
+
+    var obj = formStorage.saveFormToObject(document.formPreferencias);
+
+    storage.data = obj;
+    storage.save();
+    return false;
 }
 
 
 /**
-* LocalStorage serialization/deserialization abstraction.
-*/
-function Storage(namespace){
+ * LocalStorage serialization/deserialization abstraction.
+ */
+function Storage(namespace, defaults) {
     var self = this;
-    
-	this.namespace = namespace;
-    this.data = {};
-    
-    if(!namespace){
-    	throw new Error("namespace is not defined");
+
+    this.namespace = namespace;
+    this.data = defaults || {};
+
+    if (!namespace) {
+        throw new Error("namespace is not defined");
     }
-    
-    this.load = function(){
-        var json = localStorage.getItem(self.namespace);
-        if(json){
-        	self.data = JSON.parse(json);
-        }
-        return self.data;
-    };
 
-	this.save = function(){
-        var json = JSON.stringify(self.data);
-        localStorage.setItem(self.namespace, json);
-    };
+    if(defaults){
+        this.load();
+    }
 }
-
-
+Storage.prototype.load = function() {
+    var json = localStorage.getItem(this.namespace);
+    if (json) {
+        this.data = JSON.parse(json);
+    }
+    return this.data;
+};
+Storage.prototype.save = function() {
+    var json = JSON.stringify(this.data);
+    localStorage.setItem(this.namespace, json);
+};
 
 
 
@@ -288,7 +294,6 @@ function Storage(namespace){
  * If 2 elements have the same ID information will be replaced, and cause possible crash on loadFormFromObject
  * 
  */
-
 var formStorage = {
 
     /**
@@ -296,32 +301,63 @@ var formStorage = {
      * @param {Element} form Reference to an <form> element
      * @param {Boolean} outputToJson True will return a String in JSON format
      */
-    saveFormToObject : function (form, outputToJson) {
+    saveFormToObject: function(form, outputToJson) {
 
-        var tagList = ['INPUT', 'TEXTAREA', 'SELECT'];
-        var object = {};
+        var formObject = {};
+        var dataObject = {};
 
         //var elements = form.getElementsByTagName('*');
-		var elements = form.querySelectorAll("input, textarea, select");
-        
-        for (var i=0; i<elements.length; i++) { //all elements
+        var elements = form.querySelectorAll("input, textarea, select");
 
-            element = elements[i];
+        for (var el = 0; el < elements.length; el++) { //all elements
 
-            for (var i = 0; i < tagList.length; i++) { //check tagList
+            var element = elements[el];
 
-                if (element.id != undefined && element.tagName == tagList[i]) {
-                    object[element.id] = formStorage.getAttributes(element);
-                    break;
-                }
+            if (element.id && element.name) {
+                formObject[element.id] = formStorage.getAttributes(element);
             }
+
+
+            switch (element.tagName) {
+
+                case "INPUT":
+
+                    switch (element.type) {
+                        case "radio":
+                            dataObject[element.name] = value(form.querySelector('input[name="' + element.name + '"]:checked').value);
+                            break;
+
+                        case "checkbox":
+                            dataObject[element.name] = value(element.checked);
+                            break;
+
+                        default:
+                            dataObject[element.name] = value(element.value);
+                            break;
+                    }
+
+                    break;
+
+                case "SELECT":
+                    dataObject[element.name] = value(element.value);
+                    break;
+
+                case "TEXTAREA":
+                    dataObject[element.name] = element.value || element.innerText || element.innerHTML;
+                    break;
+            }
+
         }
 
         if (outputToJson) {
-            object = JSON.stringify(object);
-        } //Convert [Object object] to JSON String
+            //Convert [Object object] to JSON String
+            formObject = JSON.stringify(formObject);
+        }
 
-        return (object);
+        return {
+            config: dataObject,
+            formState: formObject
+        };
     },
 
 
@@ -330,26 +366,22 @@ var formStorage = {
      * @param {Element} form Reference to an <form> element
      * @param {Object} object A Object with the properties stored (Object or JSON)
      */
-    loadFormFromObject : function (form, object) {
+    loadFormFromObject: function(form, object) {
 
         var tagList = ['INPUT', 'TEXTAREA', 'SELECT'];
 
         if (typeof object === "string") {
+            //Convert JSON String to [Object object]
             object = JSON.parse(object);
-        } //Convert JSON String to [Object object]
+        } 
 
-        var elements = form.getElementsByTagName('*');
-        for (var element in elements) { //All elements
-            element = elements[element]; //current element
+        var elements = form.querySelectorAll("input, textarea, select");
+        for (var el = 0; el < elements.length; el++) { //all elements
+            var element = elements[el];
 
-            for (var i = 0; i < tagList.length; i++) { //check tagList
-                if (element.id != undefined && (element.tagName == tagList[i])) {
-                    formStorage.setAttributes(element, object[element.id]);
-                    break;
-                }
+            if (element.id && object[element.id]) {
+                formStorage.setAttributes(element, object[element.id]);
             }
-
-
         }
     },
 
@@ -358,18 +390,19 @@ var formStorage = {
      * Extract properties of a element and return a Object
      * @param {Element} element Reference to a element
      */
-    getAttributes : function (element) {
+    getAttributes: function(element) {
         if (element.id != undefined) {
 
             var object = {};
 
             var attList = ['id', 'name', 'type', 'value', 'title', 'alt', 'placeholder',
-                'disabled', 'checked', 'selected', 'readonly', 'src', 'selectedIndex'];
+                'disabled', 'checked', 'selected', 'readonly', 'src', 'selectedIndex'
+            ];
 
             for (var i = 0; i < attList.length; i++) { //all attributes equals to attList
                 var att = attList[i];
 
-                if (element[att] != undefined && element[att] != "") {
+                if (element[att] !== undefined && element[att] !== "") {
                     object[att] = element[att];
                 }
             }
@@ -384,10 +417,8 @@ var formStorage = {
      * @param {Element} element 
      * @param {Object} object
      */
-    setAttributes : function (element, object) {
-
-        if (object.id != undefined) { //this input have settings stored on obj?
-
+    setAttributes: function(element, object) {
+        if (object && object.id) { //this input have settings stored on obj?
             for (var attribute in object) {
                 element[attribute] = object[attribute]; //load attribute from object
             }
@@ -396,6 +427,23 @@ var formStorage = {
 
 };
 
+
+function value(x) {
+    if (typeof x === "string") {
+        switch (x) {
+            case "true":
+                return true;
+            case "false":
+                return false;
+            case "null":
+                return null;
+            case "undefined":
+                return void 0;
+        }
+        if (!isNaN(x) && !isNaN(parseFloat(x))) return +x;
+    }
+    return x;
+}
 </script>
 </body>
 </html>
