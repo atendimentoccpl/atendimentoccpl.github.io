@@ -227,23 +227,23 @@
 </form>
 
 <script>
-var storage = new Storage("AppCcpl");
+var storage;
 
 window.onload = function() {
 
-    savebutton.onclick = salvar;
+    var storage = new Storage("AppCcpl");
     storage.load();
     formStorage.loadFormFromObject(document.formPreferencias, storage.data.formState);
+
+    savebutton.onclick = salvarConfigs;
 }
 
-function salvar(e) {
+function salvarConfigs(e) {
     e.preventDefault();
 
     var obj = formStorage.saveFormToObject(document.formPreferencias);
-
     storage.data = obj;
     storage.save();
-    return false;
 }
 
 
@@ -368,21 +368,25 @@ var formStorage = {
      */
     loadFormFromObject: function(form, object) {
 
-        var tagList = ['INPUT', 'TEXTAREA', 'SELECT'];
+        if(object){
 
-        if (typeof object === "string") {
-            //Convert JSON String to [Object object]
-            object = JSON.parse(object);
-        } 
+            var tagList = ['INPUT', 'TEXTAREA', 'SELECT'];
 
-        var elements = form.querySelectorAll("input, textarea, select");
-        for (var el = 0; el < elements.length; el++) { //all elements
-            var element = elements[el];
+            if (typeof object === "string") {
+                //Convert JSON String to [Object object]
+                object = JSON.parse(object);
+            } 
 
-            if (element.id && object[element.id]) {
-                formStorage.setAttributes(element, object[element.id]);
+            var elements = form.querySelectorAll("input, textarea, select");
+            for (var el = 0; el < elements.length; el++) { //all elements
+                var element = elements[el];
+
+                if (element.id && object[element.id]) {
+                    formStorage.setAttributes(element, object[element.id]);
+                }
             }
         }
+        else console.log("Empty settings");
     },
 
 
@@ -426,6 +430,8 @@ var formStorage = {
     }
 
 };
+
+
 
 
 function value(x) {
