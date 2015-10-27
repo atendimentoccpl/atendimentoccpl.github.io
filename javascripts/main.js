@@ -26,6 +26,9 @@ function initClock() {
     
     clock.timezone = storage.data.config.timezone;
     clock.daylightSaving  = storage.data.config.daylightsaving;
+    
+    clock.enabled  = storage.data.config.syncEnabled;
+    clock.syncExpire  = storage.data.config.syncTimeout;
 
     //timer
     clockTimer = setInterval(clockTick, 1000);
