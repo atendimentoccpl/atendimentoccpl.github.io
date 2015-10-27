@@ -268,6 +268,9 @@ function value(x) {
 
 var storage = new Storage("AppCcpl", {
     config:{
+        syncClock: true,
+        syncTimeout: 300000,
+      
         timezone: -3,
         daylightsaving: false,
         
