@@ -112,25 +112,19 @@
 
     var clock;
     
-    function ready(fn) {
-      if (document.readyState != 'loading'){
-        fn();
-      } else if (document.addEventListener) {
-        document.addEventListener('DOMContentLoaded', fn);
-      } else {
-        document.attachEvent('onreadystatechange', function() {
-          if (document.readyState != 'loading')
-            fn();
-        });
-      }
-    }
-
     ready(function() {
         
-        storage = new Storage('AppCcpl');
-        storage.data = {
-            
-        };
+        storage = new Storage("AppCcpl", {
+            config:{
+                timezone: -3,
+                daylightsaving: false,
+                
+                timeFormat: 12,
+                monthFormat: "mo",
+                
+                screensaverSettings: 300000
+            }
+        });
         storage.load();
         
         clock = new InternetClock();
