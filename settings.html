@@ -139,8 +139,48 @@
 	</div>
   </div>
 </div>
+  
+<br/>
 
+<fieldset>
+
+<!-- Form Name -->
+<legend>Sincronizar</legend>
+  
+  <!-- Multiple Checkboxes -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="syncEnabled">Syncronizar Relogio</label>
+  <div class="col-md-4">
+  <div class="checkbox">
+    <label for="syncEnabled-0">
+      <input type="checkbox" name="syncEnabled" id="syncEnabled-0" value="1">
+      Utilizar servidor na internet para calcular diferença de tempo
+    </label>
+	</div>
+  </div>
+</div>
+  
+
+  
+<!-- Select Basic -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="syncTimeout">Sincronizar a cada</label>
+  <div class="col-md-4">
+    <select id="syncTimeout" name="syncTimeout" class="form-control">
+      <option value="30000">30s</option>
+      <option value="60000">1m</option>
+      <option value="120000">2m</option>
+      <option value="180000">3m</option>
+      <option value="300000" selected>5m</option>
+      <option value="600000">10m</option>
+      <option value="900000">15m</option>
+      <option value="1800000">30m</option>
+      <option value="3600000">1h</option>
+    </select>
+  </div>
+</div>
 </fieldset>
+  
 <fieldset>
 
 <!-- Form Name -->
