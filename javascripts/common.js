@@ -1,14 +1,4 @@
-var storage = new Storage("AppCcpl", {
-    config:{
-        timezone: -3,
-        daylightsaving: false,
-        
-        timeFormat: 12,
-        monthFormat: "mo",
-        
-        screensaverSettings: 300000
-    }
-});
+
 
 
 function ready(fn) {
@@ -87,7 +77,7 @@ function Storage(namespace, defaults) {
     }
 
     if(defaults){
-        this.load();
+        //this.load();
     }
 }
 Storage.prototype.load = function() {
@@ -274,3 +264,16 @@ function value(x) {
     }
     return x;
 }
+
+
+var storage = new Storage("AppCcpl", {
+    config:{
+        timezone: -3,
+        daylightsaving: false,
+        
+        timeFormat: 12,
+        monthFormat: "mo",
+        
+        screensaverSettings: 300000
+    }
+});
