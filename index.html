@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Circuito Liberdade - CCPL</title>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes">
-    
+
     <base target="contentFrame">
 
     <link rel="icon" type="image/png" href="http://i.imgur.com/jNWFzMB.png" />
@@ -26,25 +27,26 @@
     <script src="/javascripts/common.js"></script>
     <script src="/javascripts/InternetClock.js"></script>
     <script src="/javascripts/main.js"></script>
-    
+
     <style>
-    @media screen and (max-width: 768px){
-        a.navbar-brand {
-            font-size: 14px;
-            font-weight: bold;
+        @media screen and (max-width: 768px) {
+            a.navbar-brand {
+                font-size: 14px;
+                font-weight: bold;
+            }
         }
-    }
-    
-    .clock .h24{
-        display:none;
-    }
-    
-    .clock:hover .h24{
-        display:inline-block;
-    }
-    .clock:hover .h12{
-        display:none;
-    }
+        
+        .clock .h24 {
+            display: none;
+        }
+        
+        .clock:hover .h24 {
+            display: inline-block;
+        }
+        
+        .clock:hover .h12 {
+            display: none;
+        }
     </style>
 </head>
 
@@ -66,7 +68,7 @@
                 </div>
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
-                        
+
                         <li class="dropdown">
                             <a href="" class="dropdown-toggle" data-toggle="dropdown">Atendimento <b class="caret"></b></a>
                             <ul class="dropdown-menu">
@@ -114,9 +116,7 @@
                                 <li class="dropdown-header">Ferramentas</li>
                                 <li><a href="http://jsfiddle.net/Victornpb/m8cedfo0/show"> Gerador de Folha de Ponto</a></li>
                                 <li><a href="http://jsfiddle.net/Victornpb/has96x22/show"> Gerador de Assinatura</a></li>
-                                
-                                <li class="divider"></li>
-                                <li><a href="https://docs.google.com/spreadsheets/d/1RLEwe1F6eVj-VMiFHicx7zwBNPb7rs9ZCnmnsNDgmIk/edit#gid=1610481601" data-title="Escala de Trabalho e Folgas" data-icon=""><i class="glyphicon glyphicon-calendar" aria-hidden="true"></i> Escala de Trabalho e Folgas</a></li>
+
                                 <li class="divider"></li>
                                 <li><a href="settings.html"><i class="glyphicon glyphicon-cog"></i> Preferencias</a></li>
                             </ul>
@@ -125,25 +125,25 @@
                     </ul>
                     <span id="rightSpan" class="navbar-brand pull-right">
                         <span id="clockDiv">Loading...</span>
-                        
+
                         <script id="clockTemplate" type="template/html">
                             <span>
                                 <span class="status {{this.synced?'synced':'unsynced'}}">{{this.status}}</span>
-                                
                                 <span class="saudacao" title="Status:{{this.status}} - Ultima sincronização (Hora Local): {{this.lastSync}}">{{this.saudacao}},</span>
                                 <span class="week" title="{{this.ddddd}}">{{this.ddd}}</span>
                                 <span class="date" title="{{this.ddddd}}, {{this.dd}} de {{this.mooo}} de {{this.yyyy}}">{{this.dd}}/{{storage.data.config.monthFormat=="mo"?this.mo:moo}}/{{this.yy}}</span>
                                 <span class="clock {{this.synced?'synced':'unsynced'}}" title="{{this.HH}}:{{this.mm}}">
-                                    
                                     <span class="h12">
-                                        <span class="hh">{{this.hh}}</span>:<span class="mm">{{this.mm}}</span>:<span class="ss">{{this.ss}}</span>
+                                        <span class="hh">{{this.hh}}</span>:
+                                        <span class="mm">{{this.mm}}</span>:
+                                        <span class="ss">{{this.ss}}</span>
                                         <span class="tt">{{this.tt}}</span>
                                     </span>
-                                    
                                     <span class="h24">
-                                        <span class="hh">{{this.HH}}</span>:<span class="mm">{{this.mm}}</span>:<span class="ss">{{this.ss}}</span>
+                                        <span class="hh">{{this.HH}}</span>:
+                                        <span class="mm">{{this.mm}}</span>:
+                                        <span class="ss">{{this.ss}}</span>
                                     </span>
-                                    
                                 </span>
                             </span>
                         </script>
@@ -154,7 +154,7 @@
         </div>
 
         <iframe name="contentFrame" id="contentFrame" src="home.html"></iframe>
-        
+
         <div id="screensaver">
             <iframe src="about:blank"></iframe>
             <div class="overlay"></div>
