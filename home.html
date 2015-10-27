@@ -88,8 +88,6 @@
 <script src="/javascripts/common.js"></script>
 <script src="/javascripts/InternetClock.js"></script>
 <script type="text/javascript">
-
-    var storage;
     
     var timer;
 
@@ -114,17 +112,6 @@
     
     ready(function() {
         
-        storage = new Storage("AppCcpl", {
-            config:{
-                timezone: -3,
-                daylightsaving: false,
-                
-                timeFormat: 12,
-                monthFormat: "mo",
-                
-                screensaverSettings: 300000
-            }
-        });
         storage.load();
         
         clock = new InternetClock();
