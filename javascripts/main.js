@@ -1,23 +1,11 @@
 var pageTitle = "CCPL";
-var storage;
 
 var clockTimer,
     clockDiv,
     clockTemplate;
     
 ready(function() {
-  
-  storage = new Storage("AppCcpl", {
-      config:{
-          timezone: -3,
-          daylightsaving: false,
-          
-          timeFormat: 12,
-          monthFormat: "mo",
-          
-          screensaverSettings: 300000
-      }
-  });
+    
   storage.load();
   
   initClock();
