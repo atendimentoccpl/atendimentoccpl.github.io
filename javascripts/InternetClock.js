@@ -2,10 +2,10 @@
  * InternetClock.js
  * @author Victornpb github.com/victornpb
  */
-
 function InternetClock() {
     var self = this;
     
+    this.enabled = true; //disable syncing
     this.debug = false;
     
     this.timezone = -3;
@@ -80,11 +80,14 @@ function InternetClock() {
     }
 
     this.sync = function(callback) {
-        if(self.debug) console.log("InternetClock","Sync Requested");
-        self.synced = false;
-        self.status = "Sync Started";
-
-        getUTCWorldTime(function(remoteDate) {
+        
+        if(self.enabled){
+         
+            if(self.debug) console.log("InternetClock","Sync Requested");
+            self.synced = false;
+            self.status = "Sync Started";
+    
+            getUTCWorldTime(function(remoteDate) {
                 if(self.debug) console.log("InternetClock","Remote Clock Received (UTC)", remoteDate);
 
                 self.syncTriggered = false;
@@ -109,9 +112,16 @@ function InternetClock() {
                 self.synced = false;
                 self.status = (self.offset?"":"Hora Local")+" Sync Failed";
             });
+        }
+        else{
+            console.log("InternetClock","Sync is disabled");
+            return;
+        }
+
     };
 
     this.getCompensatedDate = function(date) {
+        
         if ((Date.now() - self.lastSync > self.syncExpire || self.lastSync === 0) && self.syncTriggered === false) {
             if(self.debug) console.log("InternetClock","Last sync expired, syncTriggered.");
             
