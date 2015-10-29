@@ -131,7 +131,7 @@
         timer = setInterval(setRandomBG, interval);
         
         //screensaver mode
-        if(location.hash.match(/screensaver/) || storage.data.homeShowclock){
+        if(location.hash.match(/screensaver/) || storage.data.config.homeShowclock){
             
             document.title = "ScreenSaver"
             document.getElementById("bg").style.opacity = 0.75;
