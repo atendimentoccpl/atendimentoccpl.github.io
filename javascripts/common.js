@@ -277,6 +277,8 @@ var storage = new Storage("AppCcpl", {
         timeFormat: 12,
         monthFormat: "mo",
         
-        screensaverSettings: 300000
+        screensaverSettings: 300000,
+        
+        homeShowclock: true
     }
 });
