@@ -147,7 +147,8 @@
 <!-- Form Name -->
 <legend>Sincronizar</legend>
   
-  <!-- Multiple Checkboxes -->
+<!-- Multiple Checkboxes -->
+<!--
 <div class="form-group">
   <label class="col-md-4 control-label" for="syncEnabled">Syncronizar Relogio</label>
   <div class="col-md-4">
@@ -159,7 +160,27 @@
 	</div>
   </div>
 </div>
-  
+-->
+
+<!-- Multiple Radios -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="syncEnabled-false">Sincronizar relogio</label>
+  <div class="col-md-4">
+  <div class="radio">
+    <label for="syncEnabled-false">
+      <input type="radio" name="syncEnabled" id="syncEnabled-false" value="false">
+      Usar relogio local
+    </label>
+	</div>
+  <div class="radio">
+    <label for="syncEnabled-true">
+      <input type="radio" name="syncEnabled" id="syncEnabled-true" value="true">
+      Utilizar servidor na internet para calcular diferença de tempo
+    </label>
+	</div>
+  </div>
+</div>
+
 
   
 <!-- Select Basic -->
@@ -254,7 +275,6 @@
 
 </fieldset>
     
-   <br>
    <hr>
     
    <!-- Button -->
@@ -265,11 +285,10 @@
       </div>
     </div>
 
-    
+    <div class="small">Obs: *As preferencias são perdidas ao limpar o historico.</div>
 </form>
 
 <script>
-var storage;
 
 window.onload = function() {
 
@@ -287,7 +306,8 @@ function salvarConfigs(e) {
     storage.data = obj;
     storage.save();
     
-    alert("Salvado!\n Atualize a página.");
+    alert("Preferencias Salvas!\n Atualize a página.");
+    top.location.reload(true);
 }
 
 </script>
