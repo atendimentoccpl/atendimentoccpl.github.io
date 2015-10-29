@@ -166,23 +166,22 @@
 <div class="form-group">
   <label class="col-md-4 control-label" for="syncEnabled-false">Sincronizar relogio</label>
   <div class="col-md-4">
-  <div class="radio">
-    <label for="syncEnabled-false">
-      <input type="radio" name="syncEnabled" id="syncEnabled-false" value="false">
-      Usar relogio local
-    </label>
-	</div>
-  <div class="radio">
+   <div class="radio">
     <label for="syncEnabled-true">
       <input type="radio" name="syncEnabled" id="syncEnabled-true" value="true">
       Utilizar servidor na internet para calcular diferença de tempo
     </label>
-	</div>
+   </div>
+   <div class="radio">
+    <label for="syncEnabled-false">
+      <input type="radio" name="syncEnabled" id="syncEnabled-false" value="false">
+      Usar relogio local
+    </label>
+   </div>
   </div>
 </div>
 
 
-  
 <!-- Select Basic -->
 <div class="form-group">
   <label class="col-md-4 control-label" for="syncTimeout">Sincronizar a cada</label>
@@ -306,7 +305,17 @@ function salvarConfigs(e) {
     storage.data = obj;
     storage.save();
     
-    alert("Preferencias Salvas!\n Atualize a página.");
+    
+    document.body.innerHTML = (
+    	'<div class="container text-center">'+
+    	'<h3>Preferencias Salvas!</h3>'+
+    	'<p>Atualize a página.</p>'+
+    	'<br>'+
+    	'<hr>'+
+    	'<span class="small text-muted">*As preferencias são perdidas limpando o historico.</small>'+
+    	'</span>'
+    );
+    
     top.location.reload(true);
 }
 
