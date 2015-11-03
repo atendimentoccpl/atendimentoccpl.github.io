@@ -19,10 +19,10 @@ body {
 }
 
 #contentFrame{
-  position:absolute;
+  position: absolute;
   width: 100%;
   height: 100%;
-  padding-top: 50px;
+  padding-top: 60px; /* .navbar height */
   border: 0;
 }
 
