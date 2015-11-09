@@ -95,3 +95,22 @@ body {
   border: 0;
   background: rgba(0,0,0,0.05);
 }
+
+/* encrypted links */
+a[data-enc="AES-256"]:after{
+    /* locked */
+    content: '\1f512';
+    font-size: 1em;
+    opacity: 1;
+}
+a[data-enc="none"]:after{
+    /* unlocked */
+    content: '\1f513';
+    font-size: 0.85em;
+    opacity: 0.5;
+}
+
+
+.navbar a[data-enc]:after{
+  float: right;
+}
