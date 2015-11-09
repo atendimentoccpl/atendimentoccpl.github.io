@@ -8,6 +8,8 @@ ready(function() {
     
   storage.load();
   
+  initSecurity();
+  
   initClock();
   initTitleChanging();
 
@@ -253,3 +255,91 @@ function ScreenSaver() {
         self.visible = false;
     }
 }
+
+
+
+/* Security  */
+
+function initSecurity(){
+    
+    //recall password
+    var key = sessionStorage.getItem("key");
+    if(key){
+        key = base64.decode(key);
+    }
+    
+    var encryptedLinks = document.querySelectorAll('a[data-enc="AES-256"]');
+    
+    for(var i=0; i<encryptedLinks.length; i++){
+    	var a = encryptedLinks[i];
+    	
+        a.onclick = encryptedLinkHandler;
+        
+        if(key){
+        	encryptedLinkHandler({target: a});
+        }
+        
+    }
+}
+
+function encryptedLinkHandler(e){
+    
+    var a = e.target || this;
+    var cipher = a.getAttribute('aes-href');
+    
+    if(cipher){
+        
+        //recall password
+        var key = sessionStorage.getItem("key");
+        if(key){
+        	key = base64.decode(key);
+        }
+        
+        for(var i=0; i<3; i++){
+            
+            if(!key){
+                key = prompt("This link is protected", "password");
+                if(!key){ //user canceled
+                	e.preventDefault();
+                    return false;
+                }
+            }
+			
+            var decrypted = Aes.Ctr.decrypt(cipher, key, 256);
+
+            if(decrypted.match(/http/)){
+                
+				a.href = decrypted;
+                
+                //a.removeAttribute('aes-href');
+                a.setAttribute('data-enc','none');
+                
+                //remeber password for later
+                sessionStorage.setItem("key", base64.encode(key));
+
+                return;
+            }
+            else{ //invalid pass
+                
+                //forget password
+                sessionStorage.removeItem("key");
+                key = null;
+
+                alert("Invalid Password!");
+            }
+
+        }
+        
+        e.preventDefault();
+    }
+}
+
+window.base64 = {
+	encode : function (str) {
+	    return window.btoa(unescape((str)));
+	},
+
+	decode : function (str) {
+	    return (escape(window.atob(str)));
+	}
+};
