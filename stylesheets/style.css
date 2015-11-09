@@ -99,18 +99,19 @@ body {
 /* encrypted links */
 a[data-enc="AES-256"]:after{
     /* locked */
-    content: '\1f512';
-    font-size: 1em;
+    content: ' \1f512';
+    font-size: 0.85em;
     opacity: 1;
 }
 a[data-enc="none"]:after{
     /* unlocked */
-    content: '\1f513';
+    content: ' \1f513';
     font-size: 0.85em;
+    color: #008800;
     opacity: 0.5;
 }
 
 
 .navbar a[data-enc]:after{
-  float: right;
+  float: none;
 }
