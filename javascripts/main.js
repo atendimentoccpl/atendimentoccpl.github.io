@@ -260,86 +260,162 @@ function ScreenSaver() {
 
 /* Security  */
 
-function initSecurity(){
-    
+function initSecurity() {
+
+    pwModal = new Modal(decryptionModal);
+
     //recall password
     var key = sessionStorage.getItem("key");
-    if(key){
+    if (key) {
         key = base64.decode(key);
     }
-    
+
     var encryptedLinks = document.querySelectorAll('a[data-enc="AES-256"]');
-    
-    for(var i=0; i<encryptedLinks.length; i++){
-    	var a = encryptedLinks[i];
-    	
+
+    for (var i = 0; i < encryptedLinks.length; i++) {
+        var a = encryptedLinks[i];
+
         a.onclick = encryptedLinkHandler;
-        
-        if(key){
-        	encryptedLinkHandler({target: a});
+
+        if (key) {
+            encryptedLinkHandler({
+                target: a
+            });
         }
-        
+
     }
 }
 
-function encryptedLinkHandler(e){
-    
+function encryptedLinkHandler(e) {
+
     var a = e.target || this;
     var cipher = a.getAttribute('aes-href');
-    
-    if(cipher){
-        
+    var encrypted = (a.getAttribute('data-enc') == "AES-256") ? true : false;
+
+    if (encrypted) {
+
         //recall password
         var key = sessionStorage.getItem("key");
-        if(key){
-        	key = base64.decode(key);
-        }
-        
-        for(var i=0; i<3; i++){
-            
-            if(!key){
-                key = prompt("This link is protected", "password");
-                if(!key){ //user canceled
-                	e.preventDefault();
-                    return false;
-                }
-            }
-			
+        if (key) {
+            key = base64.decode(key);
+
             var decrypted = Aes.Ctr.decrypt(cipher, key, 256);
 
-            if(decrypted.match(/http/)){
-                
-				a.href = decrypted;
-                
+            if (decrypted.match(/http/)) {
+
+                console.log("Link decrypted.");
+
+                a.href = decrypted;
+
                 //a.removeAttribute('aes-href');
-                a.setAttribute('data-enc','none');
-                
+                a.setAttribute('data-enc', 'none');
+
                 //remeber password for later
                 sessionStorage.setItem("key", base64.encode(key));
 
-                return;
-            }
-            else{ //invalid pass
-                
+            } else { //invalid pass
                 //forget password
                 sessionStorage.removeItem("key");
                 key = null;
-
-                alert("Invalid Password!");
             }
 
         }
-        
-        e.preventDefault();
+
+        if (!key) {
+
+            if (e.preventDefault) e.preventDefault();
+
+            pwModal.open(function (pw) {
+
+                if (pw == null) return;
+
+                var decrypted = Aes.Ctr.decrypt(cipher, pw, 256);
+
+                if (decrypted.match(/http/)) {
+
+                    console.log("Link decrypted.");
+
+                    a.href = decrypted;
+
+                    //a.removeAttribute('aes-href');
+                    a.setAttribute('data-enc', 'none');
+
+                    //remeber password for later
+                    sessionStorage.setItem("key", base64.encode(pw));
+
+                    a.dispatchEvent(new MouseEvent("click", {
+                        "view": window,
+                        "bubbles": true,
+                        "cancelable": false
+                    }));
+
+                } else { //invalid pass
+
+                    //forget password
+                    sessionStorage.removeItem("key");
+                    key = null;
+
+                    alert("Invalid Password!");
+                }
+
+            });
+
+        }
+
+
     }
 }
 
-window.base64 = {
-	encode : function (str) {
-	    return window.btoa(unescape((str)));
-	},
 
-	decode : function (str) {
-	    return (escape(window.atob(str)));
-	}
+
+function Modal(elm) {
+    var self = this;
+
+    this.DOM = {
+        elm: elm,
+        form: elm.querySelector('form'),
+        close: elm.querySelector('.close'),
+        pw: elm.querySelector('input[type="password"]'),
+        submit: elm.querySelector('input[type="submit"]')
+    };
+
+    this.callback = function () {};
+
+    this.DOM.elm.style.display = "none";
+
+    this.DOM.form.onsubmit = function (e) {
+
+        self.callback(self.DOM.pw.value);
+
+        e.preventDefault();
+        self.close();
+        return false;
+    };
+
+    this.DOM.close.onclick = function () {
+        self.close();
+        self.callback(null);
+    }
+
+    this.open = function (callback) {
+        self.DOM.elm.style.display = "block";
+        self.DOM.pw.focus();
+
+        if (callback) self.callback = callback;
+    }
+    this.close = function () {
+        self.DOM.elm.style.display = "none";
+        self.DOM.pw.value = "";
+    }
+};
+
+
+window.base64 = {
+    encode: function (str) {
+        return window.btoa(unescape((str)));
+    },
+
+    decode: function (str) {
+        return (escape(window.atob(str)));
+    }
 };
