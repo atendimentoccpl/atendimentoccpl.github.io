@@ -33,6 +33,9 @@ body {
   text-transform: auto;
 }
 
+#rightSpan > a {
+    text-decoration: none;
+}
 #clockDiv{
   font-size: 11pt;
   /* cursor: default; */
