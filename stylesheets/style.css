@@ -35,7 +35,7 @@ body {
 
 #clockDiv{
   font-size: 11pt;
-  cursor: default;
+  /* cursor: default; */
 }
 .saudacao{
   opacity: 0.5;
