@@ -279,6 +279,6 @@ var storage = new Storage("AppCcpl", {
         
         screensaverSettings: 300000,
         
-        homeShowclock: true
+        homeShowclock: false
     }
 });
