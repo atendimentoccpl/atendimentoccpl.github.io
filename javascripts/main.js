@@ -355,7 +355,7 @@ function encryptedLinkHandler(e) {
                     sessionStorage.removeItem("key");
                     key = null;
 
-                    alert("Invalid Password!");
+                    alert("Senha Incorreta!");
                 }
 
             });
@@ -375,7 +375,8 @@ function Modal(elm) {
         elm: elm,
         form: elm.querySelector('form'),
         close: elm.querySelector('.close'),
-        pw: elm.querySelector('input[type="password"]'),
+        pw: elm.querySelector('input[name="password"]'),
+        remember: elm.querySelector('input[name="remember"]'),
         submit: elm.querySelector('input[type="submit"]')
     };
 
