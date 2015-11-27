@@ -1,214 +1,205 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-    <title>Circuito Liberdade - CCPL</title>
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes">
+<title>Circuito Liberdade - CCPL</title>
+<link rel="icon" type="image/png" href="http://i.imgur.com/jNWFzMB.png" />
+<link rel="apple-touch-icon" type="image/png" href="http://i.imgur.com/jNWFzMB.png" />
 
-    <base target="contentFrame">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 
-    <link rel="icon" type="image/png" href="http://i.imgur.com/jNWFzMB.png" />
-    <link rel="apple-touch-icon" type="image/png" href="http://i.imgur.com/jNWFzMB.png" />
+<!-- theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+<!--<link rel="stylesheet" href="https://bootswatch.com/flatly/bootstrap.min.css">-->
+<!--<link rel="stylesheet" href="https://bootswatch.com/darkly/bootstrap.min.css">-->
 
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<link rel="stylesheet" href="/stylesheets/style.css">
 
-    <!-- theme -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
-    <!--<link rel="stylesheet" href="https://bootswatch.com/flatly/bootstrap.min.css">-->
-    <!--<link rel="stylesheet" href="https://bootswatch.com/darkly/bootstrap.min.css">-->
-    
-    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes">
 
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<base target="contentFrame">
 
+<style>
+@media screen and (max-width: 768px) {
+    a.navbar-brand {
+        font-size: 14px;
+        font-weight: bold;
+    }
+}
 
-    <link rel="stylesheet" href="/stylesheets/style.css">
-    
-    <script src="/javascripts/aes.js"></script>
-    <script src="/javascripts/sha256.js"></script>
-    
-    <script src="/javascripts/common.js"></script>
-    <script src="/javascripts/InternetClock.js"></script>
-    <script src="/javascripts/main.js"></script>
+.clock .h24 {
+    display: none;
+}
 
-    <style>
-        @media screen and (max-width: 768px) {
-            a.navbar-brand {
-                font-size: 14px;
-                font-weight: bold;
-            }
-        }
-        
-        .clock .h24 {
-            display: none;
-        }
-        
-        .clock:hover .h24 {
-            display: inline-block;
-        }
-        
-        .clock:hover .h12 {
-            display: none;
-        }
-        
-        
-        #rightSpan a {
-            color: inherit;
-        }
-    </style>
+.clock:hover .h24 {
+    display: inline-block;
+}
+
+.clock:hover .h12 {
+    display: none;
+}
+
+#rightSpan a {
+    color: inherit;
+}
+</style>
 </head>
-
 <body>
 
-    <!-- Wrap all page content here -->
-    <div id="wrap">
+<!-- Wrap all page content here -->
+<div id="wrap">
 
-        <!-- Fixed navbar -->
-        <div class="navbar navbar-default navbar-fixed-top">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="home.html">Circuito Liberdade</a>
-                </div>
-                <div class="collapse navbar-collapse">
-                    <ul class="nav navbar-nav">
+    <!-- Fixed navbar -->
+    <div class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="home.html">Circuito Liberdade</a>
+            </div>
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
 
-                        <li class="dropdown">
-                            <a href="" class="dropdown-toggle" data-toggle="dropdown">Atendimento <b class="caret"></b></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#" data-title="Controle de Atendimento" data-icon="" aes-href="zQNx3aSfQFZsw837DKbeAxaV0IfKAIrxfGmHb2bWOm4lDSe6bEWp6W3K6+hrNU4SnPMNtwzuWNfbgw+kwdq+zQyUN8QFxOErfYanFJXZgHFUTv7SqXG3au0dSMYB" data-enc="AES-256"><i class="glyphicon glyphicon-check"></i> Controle de Atendimento</a></li>
-                                <li class="divider"></li>
-                                <li class="dropdown-header">Relatórios</li>
-                                <li><a href="https://docs.google.com/spreadsheets/d/1B893a8yK4tviHeP3z-7pLVBTb3ow0R1xdCnmAcWxfmA/pubhtml#"><i class="glyphicon glyphicon-stats"></i> Relatório de Atendimento</a></li>
-                                <li><a href="https://docs.google.com/forms/d/1JPxBRFJT5IqI-8vHZaIOBgHvxExI71Kyl2XUFEncCPM/viewanalytics" target="_blank"><i class="glyphicon glyphicon-stats"></i> Estatisticas</a></li>
-                                <li class="divider"></li>
-                                <li class="dropdown-header">Documentos</li>
-                                <li><a href="https://docs.google.com/spreadsheets/d/1B893a8yK4tviHeP3z-7pLVBTb3ow0R1xdCnmAcWxfmA/edit"><i class="glyphicon glyphicon-th-list"></i> Planilha Controle de Atendimento</a></li>
-                            </ul>
-                        </li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Espaços <b class="caret"></b></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="https://docs.google.com/spreadsheets/d/1JQRz3gr1lWtN1WB0TZE5Cgx4oS0ymzXxGAiK36Dc67E/pubhtml" data-title="Telefones" data-icon=""><i class="glyphicon glyphicon-earphone"></i> Telefones</a></li>
-                                <li><a href="https://docs.google.com/spreadsheets/d/1JlarG2bqswuVPI2UB-yE9PMbfQhXNo2QIOio3FHK68g/pubhtml" data-title="Horários" data-icon=""><i class="glyphicon glyphicon-time"></i> Horários</a></li>
+                    <li class="dropdown">
+                        <a href="" class="dropdown-toggle" data-toggle="dropdown">Atendimento <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#" data-title="Controle de Atendimento" data-icon="" aes-href="zQNx3aSfQFZsw837DKbeAxaV0IfKAIrxfGmHb2bWOm4lDSe6bEWp6W3K6+hrNU4SnPMNtwzuWNfbgw+kwdq+zQyUN8QFxOErfYanFJXZgHFUTv7SqXG3au0dSMYB" data-enc="AES-256"><i class="glyphicon glyphicon-check"></i> Controle de Atendimento</a></li>
+                            <li class="divider"></li>
+                            <li class="dropdown-header">Relatórios</li>
+                            <li><a href="https://docs.google.com/spreadsheets/d/1B893a8yK4tviHeP3z-7pLVBTb3ow0R1xdCnmAcWxfmA/pubhtml#"><i class="glyphicon glyphicon-stats"></i> Relatório de Atendimento</a></li>
+                            <li><a href="https://docs.google.com/forms/d/1JPxBRFJT5IqI-8vHZaIOBgHvxExI71Kyl2XUFEncCPM/viewanalytics" target="_blank"><i class="glyphicon glyphicon-stats"></i> Estatisticas</a></li>
+                            <li class="divider"></li>
+                            <li class="dropdown-header">Documentos</li>
+                            <li><a href="https://docs.google.com/spreadsheets/d/1B893a8yK4tviHeP3z-7pLVBTb3ow0R1xdCnmAcWxfmA/edit"><i class="glyphicon glyphicon-th-list"></i> Planilha Controle de Atendimento</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Espaços <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="https://docs.google.com/spreadsheets/d/1JQRz3gr1lWtN1WB0TZE5Cgx4oS0ymzXxGAiK36Dc67E/pubhtml" data-title="Telefones" data-icon=""><i class="glyphicon glyphicon-earphone"></i> Telefones</a></li>
+                            <li><a href="https://docs.google.com/spreadsheets/d/1JlarG2bqswuVPI2UB-yE9PMbfQhXNo2QIOio3FHK68g/pubhtml" data-title="Horários" data-icon=""><i class="glyphicon glyphicon-time"></i> Horários</a></li>
 
-                                <li><a href="https://docs.google.com/document/d/1BizJENPr612uVL4c7o39QMpwsU7hv4vJcaND_HXdo6g/pub" data-title="Informações" data-icon=""><i class="glyphicon glyphicon-info-sign"></i> Informações</a></li>
-                                <li class="divider"></li>
-                                <li class="dropdown-header">Site</li>
-                                <li><a href="http://circuitoculturalliberdade.com.br/#">circuitoculturalliberdade.com.br</a></li>
-                                <li><a href="http://circuitoculturalliberdade.com.br/plus/modulos/listas/index.php?tac=agenda&layout=programacao" data-title="Programação" data-icon="">Programação</a></li>
-                                <li class="divider"></li>
+                            <li><a href="https://docs.google.com/document/d/1BizJENPr612uVL4c7o39QMpwsU7hv4vJcaND_HXdo6g/pub" data-title="Informações" data-icon=""><i class="glyphicon glyphicon-info-sign"></i> Informações</a></li>
+                            <li class="divider"></li>
+                            <li class="dropdown-header">Site</li>
+                            <li><a href="http://circuitoculturalliberdade.com.br/#">circuitoculturalliberdade.com.br</a></li>
+                            <li><a href="http://circuitoculturalliberdade.com.br/plus/modulos/listas/index.php?tac=agenda&layout=programacao" data-title="Programação" data-icon="">Programação</a></li>
+                            <li class="divider"></li>
 
-                                <li><a href="http://totem.circuitoculturalliberdade.com.br/#">Totem</a></li>
-                            </ul>
-                        </li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Mais <b class="caret"></b></a>
-                            <ul class="dropdown-menu">
-                                <li class="dropdown-header">Google Drive</li>
-                                <li><a href="#" target="_blank" aes-href="PwKtpm+fQFZdKXhJJn0aRZvi/4F3CKvtWguYoUJoH0a4ZC7c8E2nFys5qfDbI7gMNA1IK3OYcwhPFhilIkNKc7f7UrgW" data-enc="AES-256"><i class="glyphicon glyphicon-folder-open" aria-hidden="true"></i><i> </i> Documentos </a></li>
-                                <li><a href="#" target="_blank" aes-href="QAJ9KG+fQFYNasVgC64Bou1f6cPUk/4OJ7hEet/4LL67z0sYBvQnZXGuhBNQxvBb1ar4n3aR/dXdE0wuWsiLfvdCC1ihr1cdkgOXT6dw+LnrIuaIzH+AYBXf4hs8T44fFZVyDc7DW9gB9I+Cz5twNyrv/IMGp7Q=" data-enc="AES-256"><i class="glyphicon glyphicon-folder-open" aria-hidden="true"></i><i> </i> Pasta Atendimento CCPL </a></li>
-                                <!--
-                                <li class="divider"></li>
-                                <li class="dropdown-header">Ponto</li>
-                                <li><a href="https://docs.google.com/forms/d/1RmE-t_NUh8IVP1_zhJIx_STrSNsq7iuOsDZol3gFu_0/viewform"><i class="glyphicon glyphicon glyphicon-ok-circle" aria-hidden="true"></i> Ponto </a></li>
-                                <li><a href="https://docs.google.com/spreadsheets/d/1XZdTBBBD4YEmymwFTPPw4RZAo4U1k4Ew5fGViXX2DuE/edit?usp=drive_web"><i class="glyphicon glyphicon glyphicon-th-list" aria-hidden="true"></i> Planilha </a></li>
-                                -->
-                                <li class="divider"></li>
-                                
-                                <li><a href="#" data-title="Escala de Trabalho e Folgas" data-icon="" aes-href="QwKRwW+fQFbyxBNmskWgQq1+Qc82r5q49GohtQ7xyhLHI5vj4R6uvCao6C3MLr7xaiODYVCKP6CeFHxtnMOwZVw9f/x7NCzGo2cAmqrPHGETTtlHjSjZ5+Bt9buAIZKAiuJl0mlZD/22h3dBu+IA" data-enc="AES-256"><i class="glyphicon glyphicon-calendar" aria-hidden="true"></i> Escala de Trabalho e Folgas</a></li>
-                                
-                                <li class="divider"></li>
-                                <li class="dropdown-header">Ferramentas</li>
-                                <li><a href="http://jsfiddle.net/Victornpb/m8cedfo0/show"> Gerador de Folha de Ponto</a></li>
-                                <li><a href="http://jsfiddle.net/Victornpb/has96x22/show"> Gerador de Assinatura</a></li>
+                            <li><a href="http://totem.circuitoculturalliberdade.com.br/#">Totem</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Mais <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li class="dropdown-header">Google Drive</li>
+                            <li><a href="#" target="_blank" aes-href="PwKtpm+fQFZdKXhJJn0aRZvi/4F3CKvtWguYoUJoH0a4ZC7c8E2nFys5qfDbI7gMNA1IK3OYcwhPFhilIkNKc7f7UrgW" data-enc="AES-256"><i class="glyphicon glyphicon-folder-open" aria-hidden="true"></i><i> </i> Documentos </a></li>
+                            <li><a href="#" target="_blank" aes-href="QAJ9KG+fQFYNasVgC64Bou1f6cPUk/4OJ7hEet/4LL67z0sYBvQnZXGuhBNQxvBb1ar4n3aR/dXdE0wuWsiLfvdCC1ihr1cdkgOXT6dw+LnrIuaIzH+AYBXf4hs8T44fFZVyDc7DW9gB9I+Cz5twNyrv/IMGp7Q=" data-enc="AES-256"><i class="glyphicon glyphicon-folder-open" aria-hidden="true"></i><i> </i> Pasta Atendimento CCPL </a></li>
+                            <!--
+                            <li class="divider"></li>
+                            <li class="dropdown-header">Ponto</li>
+                            <li><a href="https://docs.google.com/forms/d/1RmE-t_NUh8IVP1_zhJIx_STrSNsq7iuOsDZol3gFu_0/viewform"><i class="glyphicon glyphicon glyphicon-ok-circle" aria-hidden="true"></i> Ponto </a></li>
+                            <li><a href="https://docs.google.com/spreadsheets/d/1XZdTBBBD4YEmymwFTPPw4RZAo4U1k4Ew5fGViXX2DuE/edit?usp=drive_web"><i class="glyphicon glyphicon glyphicon-th-list" aria-hidden="true"></i> Planilha </a></li>
+                            -->
+                            <li class="divider"></li>
+                            
+                            <li><a href="#" data-title="Escala de Trabalho e Folgas" data-icon="" aes-href="QwKRwW+fQFbyxBNmskWgQq1+Qc82r5q49GohtQ7xyhLHI5vj4R6uvCao6C3MLr7xaiODYVCKP6CeFHxtnMOwZVw9f/x7NCzGo2cAmqrPHGETTtlHjSjZ5+Bt9buAIZKAiuJl0mlZD/22h3dBu+IA" data-enc="AES-256"><i class="glyphicon glyphicon-calendar" aria-hidden="true"></i> Escala de Trabalho e Folgas</a></li>
+                            
+                            <li class="divider"></li>
+                            <li class="dropdown-header">Ferramentas</li>
+                            <li><a href="http://jsfiddle.net/Victornpb/m8cedfo0/show"> Gerador de Folha de Ponto</a></li>
+                            <li><a href="http://jsfiddle.net/Victornpb/has96x22/show"> Gerador de Assinatura</a></li>
 
-                                <li class="divider"></li>
-                                <li><a href="settings.html"><i class="glyphicon glyphicon-cog"></i> Preferencias</a></li>
-                            </ul>
-                        </li>
+                            <li class="divider"></li>
+                            <li><a href="settings.html"><i class="glyphicon glyphicon-cog"></i> Preferencias</a></li>
+                        </ul>
+                    </li>
 
-                    </ul>
-                    
-                    <span id="rightSpan" class="navbar-brand pull-right">
-                        <a href="settings.html">
-                            <span id="clockDiv">Loading...</span>
-                        </a>
-                        <script id="clockTemplate" type="template/html">
-                            <span>
-                                <span class="status {{this.synced?'synced':'unsynced'}}">{{this.status}}</span>
-                                <span class="saudacao" title="Status:{{this.status}} - Ultima sincronização (Hora Local): {{this.lastSync}}">{{this.saudacao}},</span>
-                                <span class="week" title="{{this.ddddd}}">{{this.ddd}}</span>
-                                <span class="date" title="{{this.ddddd}}, {{this.dd}} de {{this.mooo}} de {{this.yyyy}}">{{this.dd}}/{{storage.data.config.monthFormat=="mo"?this.mo:moo}}/{{this.yy}}</span>
-                                <span class="clock {{this.synced?'synced':'unsynced'}}" title="{{this.HH}}:{{this.mm}}">
-                                    <span class="h12">
-                                        <span class="hh">{{this.hh}}</span>:<span class="mm">{{this.mm}}</span><span class="ss">:{{this.ss}}</span> <span class="tt">{{this.tt}}</span>
-                                    </span>
-                                    <span class="h24">
-                                        <span class="hh">{{this.HH}}</span>:<span class="mm">{{this.mm}}</span><span class="ss">:{{this.ss}}</span>
-                                    </span>
+                </ul>
+                
+                <span id="rightSpan" class="navbar-brand pull-right">
+                    <a href="settings.html">
+                        <span id="clockDiv">Loading...</span>
+                    </a>
+                    <script id="clockTemplate" type="template/html">
+                        <span>
+                            <span class="status {{this.synced?'synced':'unsynced'}}">{{this.status}}</span>
+                            <span class="saudacao" title="Status:{{this.status}} - Ultima sincronização (Hora Local): {{this.lastSync}}">{{this.saudacao}},</span>
+                            <span class="week" title="{{this.ddddd}}">{{this.ddd}}</span>
+                            <span class="date" title="{{this.ddddd}}, {{this.dd}} de {{this.mooo}} de {{this.yyyy}}">{{this.dd}}/{{storage.data.config.monthFormat=="mo"?this.mo:moo}}/{{this.yy}}</span>
+                            <span class="clock {{this.synced?'synced':'unsynced'}}" title="{{this.HH}}:{{this.mm}}">
+                                <span class="h12">
+                                    <span class="hh">{{this.hh}}</span>:<span class="mm">{{this.mm}}</span><span class="ss">:{{this.ss}}</span> <span class="tt">{{this.tt}}</span>
+                                </span>
+                                <span class="h24">
+                                    <span class="hh">{{this.HH}}</span>:<span class="mm">{{this.mm}}</span><span class="ss">:{{this.ss}}</span>
                                 </span>
                             </span>
-                        </script>
-                    </span>
-                
-                </div>
-                <!--/.nav-collapse -->
+                        </span>
+                    </script>
+                </span>
+            
             </div>
+            <!--/.nav-collapse -->
         </div>
+    </div>
 
-        <iframe name="contentFrame" id="contentFrame" src="home.html"></iframe>
+    <iframe name="contentFrame" id="contentFrame" src="home.html"></iframe>
 
-        <div id="screensaver">
-            <iframe src="about:blank"></iframe>
-            <div class="overlay"></div>
-        </div>
-        
-        
-        <div id="decryptionModal" class="overlay">
-            <div class="col-sm-6 col-center">
-                <form>
-                    <div class="panel panel-default">
-                        <div class="panel-heading">Area restrita
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span>
-        
-                            </button>
+    <div id="screensaver">
+        <iframe src="about:blank"></iframe>
+        <div class="overlay"></div>
+    </div>
+    
+    <div id="decryptionModal" class="overlay">
+        <div class="col-sm-6 col-center">
+            <form>
+                <div class="panel panel-default">
+                    <div class="panel-heading">Area restrita
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span>
+    
+                        </button>
+                    </div>
+                    <div class="panel-body">
+                        <div class="form-group">
+                            
+                            <p class="help-block text-center">O link que você está tentando abrir, faz parte de uma área restrita. <br>Uma senha é nescessária para acessá-la.</p>
+                            <label label-default="" for="inputPassword1" class="col-lg-2 control-label ">Senha</label>
+                            <div class="col-lg-10">
+                                <input name="password" type="password" class="form-control" id="inputPassword1" placeholder="senha" autofocus>
+                            </div>
                         </div>
-                        <div class="panel-body">
-                            <div class="form-group">
-                                
-                                <p class="help-block text-center">O link que você está tentando abrir, faz parte de uma área restrita. <br>Uma senha é nescessária para acessá-la.</p>
-                                <label label-default="" for="inputPassword1" class="col-lg-2 control-label ">Senha</label>
-                                <div class="col-lg-10">
-                                    <input name="password" type="password" class="form-control" id="inputPassword1" placeholder="senha" autofocus>
+                        <div class="form-group hidden">
+                            <div class="col-lg-offset-2 col-lg-10">
+                                <div class="checkbox">
+                                    <label><input name="remember" type="checkbox" disabled>Lembrar senha</label>
                                 </div>
                             </div>
-                            <div class="form-group hidden">
-                                <div class="col-lg-offset-2 col-lg-10">
-                                    <div class="checkbox">
-                                        <label><input name="remember" type="checkbox" disabled>Lembrar senha</label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-lg-offset-2 col-lg-10 text-center">
-                                    <br>
-                                    <button type="submit" class="btn btn-default">Acessar</button>
-                                </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-lg-offset-2 col-lg-10 text-center">
+                                <br>
+                                <button type="submit" class="btn btn-default">Acessar</button>
                             </div>
                         </div>
                     </div>
-                </form>
-            </div>
+                </div>
+            </form>
         </div>
+    </div>
+</div>
+<!-- scripts -->
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+<script src="/javascripts/aes.js"></script>
+<script src="/javascripts/sha256.js"></script>
+<script src="/javascripts/common.js"></script>
+<script src="/javascripts/InternetClock.js"></script>
+<script src="/javascripts/main.js"></script>
 
 </body>
-
 </html>
